@@ -8,16 +8,26 @@ class PostsView extends Component {
         this.props.getPosts()
       }
     render(){
+        const {posts} = this.props
+
         return (
-            <p>GO</p>
+            <div>
+                <ul>
+
+                </ul>
+            </div>
         )
     }
 }
+                    //{posts.map(({ id, timestamp, title, body, author}) => (
+                        //<li key={id}>{title} by {author}</li>
+                    //))}
+function mapStateToProps ({ posts, categories }) {
 
-function mapStateToProps (state) {
+console.log(Object.keys(posts))
     return {
-        posts: state.posts,
-        categories: state.categories,
+        posts: posts,
+        categories: categories,
     }
   }
 

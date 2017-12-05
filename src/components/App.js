@@ -14,7 +14,7 @@ const enhancer = composeEnhancers(
 
 const store = createStore(
   reducer,
-  {posts:[],categories:[]},
+  {posts:{},categories:{}},
   enhancer
 )
 

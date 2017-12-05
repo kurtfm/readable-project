@@ -15,7 +15,6 @@ export const UPDATE_CATEGORIES = 'UPDATE_CATEGORIES'
 export function getPosts(){
     return function(dispatch, getState){
         getAllPosts().then((data) => {
-            console.log(data)
             dispatch(updatePosts(data))
           })
     }

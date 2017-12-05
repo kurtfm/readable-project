@@ -15,9 +15,34 @@ import {
 function posts(state = {}, action){
     switch(action.type){
         case UPDATE_POSTS:
+            const { posts } = action
+            let postsObj= {}
+            posts.forEach(
+                ({id,
+                  timestamp,
+                  title,
+                  author,
+                  body,
+                  category,
+                  voteScore,
+                  deleted,
+                  commentCount}) =>{
+                      console.log(id)
+                      postsObj[id] = {
+                        timestamp,
+                        title,
+                        author,
+                        body,
+                        category,
+                        voteScore,
+                        deleted,
+                        commentCount,
+                    }}
+            )
+            console.log(postsObj)
             return {
                 ...state,
-                [posts]: action.posts
+                [posts]:postsObj
             }
         default:
             return state
@@ -27,6 +52,7 @@ function posts(state = {}, action){
 function categories(state = {}, action){
     switch(action.type){
         case UPDATE_CATEGORIES:
+            const { categories } = action
             return {
                 ...state,
                 [categories]: action.categories
