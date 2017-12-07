@@ -1,24 +1,23 @@
 import { combineReducers } from 'redux'
 
 import {
-    UPDATE_POSTS,
-    UPDATE_POST,
-    PVOTE_POST,
+    GET_POSTS,
+    GET_POST,
+    UPVOTE_POST,
     DOWNVOTE_POST,
-    UPDATE_COMMENTS,
+    GET_COMMENTS,
     UPDATE_COMMENT,
     UPVOTE_COMMENT,
     DOWNVOTE_COMMENT,
-    UPDATE_CATEGORIES,
+    GET_CATEGORIES,
   } from '../actions'
 
 function posts(state = {}, action){
     switch(action.type){
-        case UPDATE_POSTS:
-            const { posts } = action
-            let postsObj= {}
-            posts.forEach(
-                ({id,
+        case GET_POSTS:
+            let posts = {}
+            action.posts.forEach(({
+                  id,
                   timestamp,
                   title,
                   author,
@@ -26,9 +25,9 @@ function posts(state = {}, action){
                   category,
                   voteScore,
                   deleted,
-                  commentCount}) =>{
-                      console.log(id)
-                      postsObj[id] = {
+                  commentCount
+                }) =>{
+                    posts[id] = {
                         timestamp,
                         title,
                         author,
@@ -37,13 +36,10 @@ function posts(state = {}, action){
                         voteScore,
                         deleted,
                         commentCount,
-                    }}
+                    }
+                }
             )
-            console.log(postsObj)
-            return {
-                ...state,
-                [posts]:postsObj
-            }
+            return posts
         default:
             return state
     }
@@ -51,12 +47,12 @@ function posts(state = {}, action){
 
 function categories(state = {}, action){
     switch(action.type){
-        case UPDATE_CATEGORIES:
-            const { categories } = action
-            return {
-                ...state,
-                [categories]: action.categories
-            }
+        case GET_CATEGORIES:
+            let categories = {}
+            action.categories.forEach(({ name, path }) => {
+                categories[name] = {path,}
+            })
+            return categories
         default:
             return state
     }
