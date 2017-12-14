@@ -1,10 +1,16 @@
-import { getAllPosts, getAllCategories } from '../utils/ReadableAPI'
+import { getAllPosts, getSinglePost, getAllCategories, getAllComments } from '../utils/ReadableAPI'
 
 export const GET_POSTS = 'GET_POSTS'
+export const FILTER_POSTS = 'FILTER_POSTS'
+export const SORT_POSTS = 'SORT_POSTS'
+export const CLEAR_POSTS = 'CLEAR_POSTS'
+export const GET_POST = 'GET_POST'
+export const CLEAR_POST = 'CLEAR_POST'
 export const UPDATE_POST = 'UPDATE_POST'
 export const UPVOTE_POST = 'UPVOTE_POST'
 export const DOWNVOTE_POST = 'DOWNVOTE_POST'
 export const GET_COMMENTS = 'GET_COMMENTS'
+export const CLEAR_COMMENTS = 'CLEAR_COMMENTS'
 export const UPDATE_COMMENT = 'UPDATE_COMMENT'
 export const UPVOTE_COMMENT = 'UPVOTE_COMMENT'
 export const DOWNVOTE_COMMENT = 'DOWNVOTE_COMMENT'
@@ -26,6 +32,68 @@ function updatePosts(posts){
         posts
     }
 }
+
+export function clearPosts(){
+    return {
+        type: CLEAR_POSTS
+    }
+}
+
+export function filterPosts(category){
+    return {
+        type: FILTER_POSTS,
+        filter: category
+    }
+}
+
+export function sortPosts(method){
+    return {
+        type: SORT_POSTS,
+        filter: method
+    }
+}
+export function getPost(id){
+    return function(dispatch, getState){
+        getSinglePost(id).then((data) => {
+            dispatch(updatePost(data))
+          })
+    }
+}
+
+function updatePost(post){
+    return {
+        type: GET_POST,
+        post
+    }
+}
+
+export function clearPost(){
+    return {
+        type: CLEAR_POST
+    }
+}
+
+export function getComments(id){
+    return function(dispatch, getState){
+        getAllComments(id).then((data) => {
+            dispatch(updateComments(data))
+          })
+    }
+}
+
+function updateComments(comments){
+    return {
+        type: GET_COMMENTS,
+        comments,
+    }
+}
+
+export function clearComments(){
+    return {
+        type: CLEAR_COMMENTS
+    }
+}
+
 export function getCategories(){
     return function(dispatch, getState){
         getAllCategories().then((data) => {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import PostsView from './PostsView'
+import PostView from './PostView'
 import { createStore, applyMiddleware, compose } from 'redux'
 import reducer from './../reducers'
 import { Provider } from 'react-redux'
@@ -27,7 +28,19 @@ class App extends Component {
             <Route exact path='/' render={() => (
               <PostsView />
             )}/>
-          </Switch>
+          <Route path='/post/:id' render={(props,history) => (
+            <PostView {...props} />
+          )}/>
+          <Route path='*' exact={true} render={() => (
+            <div>
+              <div className="missing-view">
+                Sorry! The page you are looking for can't be found.
+                Here are your book shelves instead:
+              </div>
+              <PostsView />
+            </div>
+          )}/>
+        </Switch>
         </div>
       </Provider>
     )
