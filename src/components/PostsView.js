@@ -49,18 +49,21 @@ function mapStateToProps (state) {
             return null
         }
     }) : []
+    const filterEnabled = state.hasOwnProperty('filter') && 
+        ( state.filter.hasOwnProperty('category') ||
+            state.filter.hasOwnProperty('sortBy') )
 
     const preppedPosts = (posts) => {
         let retArr = posts
-        const {category,sortBy} = state.filter
-        if(category){
-            retArr = posts.filter((post) => (post.category === state.filter.category))
+        const {filter} = state
+        if(filter.hasOwnProperty('category') && filter.category !== null){
+            retArr = posts.filter((post) => (post.category === filter.category))
         }
-        if(sortBy){
-            if(sortBy === 'author'){
+        if(filter.hasOwnProperty('sortBy') && filter.sortBy !== null){
+            if(filter.sortBy === 'author'){
                 retArr = retArr.sort((a,b) => {
-                    const name1 = a.author.toLowerCase
-                    const name2 = b.author.toLowerCase
+                    const name1 = a.author.toLowerCase().replace(/\s/g,'')
+                    const name2 = b.author.toLowerCase().replace(/\s/g,'')
                     if(name1 < name2){
                         return -1
                     }
@@ -70,13 +73,13 @@ function mapStateToProps (state) {
                     return 0
                 })
             }
-            if(sortBy === 'timestamp'){
+            if(filter.sortBy === 'timestamp'){
                 retArr = retArr.sort((a,b) => (a.timestamp - b.timestamp))
             }
-            if(sortBy === 'title' ){
+            if(filter.sortBy === 'title' ){
                 retArr = retArr.sort((a,b) => {
-                    const title1 = a.title.toLowerCase
-                    const title2 = b.title.toLowerCase
+                    const title1 = a.title.toLowerCase().replace(/\s/g,'')
+                    const title2 = b.title.toLowerCase().replace(/\s/g,'')
                     if(title1 < title2){
                         return -1
                     }
@@ -92,7 +95,7 @@ function mapStateToProps (state) {
     }
 
     return {
-        posts: preppedPosts(entriesArr)
+        posts: filterEnabled ? preppedPosts(entriesArr) : entriesArr,
     }
   }
 

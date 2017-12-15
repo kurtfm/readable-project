@@ -2,7 +2,9 @@ import { getAllPosts, getSinglePost, getAllCategories, getAllComments } from '..
 
 export const GET_POSTS = 'GET_POSTS'
 export const FILTER_POSTS = 'FILTER_POSTS'
+export const CLEAR_FILTER = 'CLEAR_FILTER'
 export const SORT_POSTS = 'SORT_POSTS'
+export const CLEAR_SORT = 'CLEAR_SORT'
 export const CLEAR_POSTS = 'CLEAR_POSTS'
 export const GET_POST = 'GET_POST'
 export const CLEAR_POST = 'CLEAR_POST'
@@ -42,16 +44,34 @@ export function clearPosts(){
 export function filterPosts(category){
     return {
         type: FILTER_POSTS,
-        filter: category
+        category,
+    }
+}
+
+export function clearFilter(){
+    return {
+        type: CLEAR_FILTER,
     }
 }
 
 export function sortPosts(method){
     return {
         type: SORT_POSTS,
-        filter: method
+        method,
     }
 }
+export function orderPosts(order){
+    return {
+        type: SORT_POSTS,
+        order,
+    }
+}
+export function clearSort(){
+    return {
+        type: CLEAR_SORT,
+    }
+}
+
 export function getPost(id){
     return function(dispatch, getState){
         getSinglePost(id).then((data) => {

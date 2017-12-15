@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getCategories, filterPosts } from '../actions'
+import { getCategories, filterPosts, clearFilter } from '../actions'
 
 class CategoriesHeader extends Component {
 
@@ -14,6 +14,7 @@ class CategoriesHeader extends Component {
                 {this.props.categories.map((category,index) => (
                     <li key={index}><button onClick={() => this.props.filterPosts(category)}>{category}</button></li>
                 ))}
+                <li><button onClick={() => this.props.clearFilter()}>Clear Filter</button></li>
             </ul>
         )
     }
@@ -29,6 +30,7 @@ function mapStateToProps (state) {
     return {
       getCategories: () => dispatch(getCategories()),
       filterPosts: (category) => dispatch(filterPosts(category)),
+      clearFilter: () => dispatch(clearFilter()),
     }
   }
 
