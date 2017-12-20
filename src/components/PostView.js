@@ -4,6 +4,7 @@ import { getPost, getComments } from '../actions'
 import CommentsView from './CommentsView'
 import PostVote from './PostVote'
 import { Link } from 'react-router-dom'
+import Modal from 'react-modal'
 
 class PostView extends Component {
 
@@ -37,6 +38,15 @@ class PostView extends Component {
                     <PostVote />
                     <p>comments: {commentCount} </p>
                     <CommentsView />
+
+                    <Modal
+        className='modal'
+        overlayClassName='overlay'
+        contentLabel='Modal'
+      >
+       <span>modal open</span>
+      </Modal>
+
                 </div>
             )
         }
