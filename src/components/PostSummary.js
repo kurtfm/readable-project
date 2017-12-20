@@ -1,18 +1,16 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 class PostSummary extends Component {
     static propTypes = {
-        title:PropTypes.string.isRequired,
-        author:PropTypes.string.isRequired,
         id:PropTypes.string.isRequired,
-        voteScore:PropTypes.number.isRequired,
-        commentCount: PropTypes.number.isRequired,
     }
 
     render(){
-        const { title, author, voteScore, commentCount, id } = this.props
+        const { id } = this.props
+        const { title, author, voteScore, commentCount } = this.props.posts[id]
         return (
             <div>
             {title}<br />
@@ -24,4 +22,17 @@ class PostSummary extends Component {
         )
     }
 }
-export default PostSummary
+function mapStateToProps (state) {
+    return {
+        post: state.post,
+    }
+  }
+  function mapDispatchToProps (dispatch) {
+    return {
+    }
+  }
+
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(PostSummary)

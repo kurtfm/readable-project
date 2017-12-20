@@ -1,28 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getComments } from '../actions'
 import CommentSummary from './CommentSummary'
 
 class CommentsView extends Component {
-
-    componentDidMount() {
-        this.props.getComments(this.props.post.id)
-      }
 
     render(){
         const {comments} = this.props
         return (
             <div>
                 <ul>
-                {comments.map(({ id, voteScore, body, author, parentId, deleted}) => (
+                {comments.map(({ id }) => (
                     <li key={id}>
-                        <CommentSummary
-                        id={id}
-                        voteScore={voteScore}
-                        body={body}
-                        author={author}
-                        parentId={parentId}
-                    />
+                        <CommentSummary id={id} />
                     </li>
                 ))}
                 </ul>
@@ -31,6 +20,7 @@ class CommentsView extends Component {
     }
 }
 function mapStateToProps (state) {
+    console.log('CommentsView mapStateToProps called')
     const entries = state.comments
     return {
         comments: Object.keys(entries)[0] ? Object.keys(entries).map(id => {
@@ -47,7 +37,6 @@ function mapStateToProps (state) {
 
   function mapDispatchToProps (dispatch) {
     return {
-      getComments: (id) => dispatch(getComments(id)),
     }
   }
 

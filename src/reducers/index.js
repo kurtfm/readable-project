@@ -9,14 +9,11 @@ import {
     CLEAR_POSTS,
     GET_POST,
     CLEAR_POST,
-    UPVOTE_POST,
-    DOWNVOTE_POST,
     GET_COMMENTS,
     CLEAR_COMMENTS,
-    UPDATE_COMMENT,
-    UPVOTE_COMMENT,
-    DOWNVOTE_COMMENT,
     GET_CATEGORIES,
+    UPDATE_POST_IN_POSTS,
+    UPDATE_COMMENT_IN_COMMENTS,
   } from '../actions'
 
 function posts(state = {}, action){
@@ -49,6 +46,29 @@ function posts(state = {}, action){
             return posts
         case CLEAR_POSTS:
             return {}
+        case UPDATE_POST_IN_POSTS:
+            const {
+                id,
+                timestamp,
+                title,
+                author,
+                body,
+                category,
+                voteScore,
+                deleted,
+                commentCount,
+            } = action.post
+            return {...state,
+                [id]: {
+                    timestamp,
+                    title,
+                    author,
+                    body,
+                    category,
+                    voteScore,
+                    deleted,
+                    commentCount,
+                }}
         default:
             return state
     }
@@ -61,8 +81,8 @@ function filter(state={}, action){
         case CLEAR_FILTER:
             return {...state,category:null}
         case SORT_POSTS:
-            return action.hasOwnProperty('method') ? { ...state, sortBy: action.method,} : { ...state,
-                orderBy: action.order }
+            return action.hasOwnProperty('method') ? { ...state, sortBy: action.method, orderBy:null} :
+                { ...state, orderBy: action.order }
         case CLEAR_SORT:
             return {...state,sortBy:null,orderBy:null}
         default:
@@ -108,6 +128,28 @@ function comments(state={}, action){
                 }
             )
             return comments
+        case UPDATE_COMMENT_IN_COMMENTS:
+            const {
+                id,
+                timestamp,
+                author,
+                body,
+                parentId,
+                parentDeleted,
+                voteScore,
+                deleted
+            } = action.comment
+            console.log(id)
+            return {...state,
+                [id]: {
+                    timestamp,
+                    author,
+                    body,
+                    parentId,
+                    parentDeleted,
+                    voteScore,
+                    deleted
+                }}
         case CLEAR_COMMENTS:
             return {}
         default:

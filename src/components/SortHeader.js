@@ -7,10 +7,10 @@ class SortHeader extends Component {
     render(){
         return (
             <ul>
-                {['time','author','title'].map((method,index) => (
+                {['time','author','title','votes'].map((method,index) => (
                     <li key={index}><button onClick={() => this.props.sortPosts(method)}>{method}</button></li>
                 ))}
-                {this.props.filter.sortBy && (
+                {(this.props.filter.hasOwnProperty('sortBy') && this.props.filter.sortBy !== null) && (
                     <ul>
                         {['ascending','descending'].map((order,index) => (
                             <li key={index}><button onClick={() => this.props.orderPosts(order)}>{order}</button></li>

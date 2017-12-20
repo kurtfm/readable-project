@@ -28,8 +28,34 @@ export const getAllCategories = () =>
     console.log(error);
   })
 
-  export const getAllComments = (id) =>
+export const getAllComments = (id) =>
   axios.get(`posts/${id}/comments`)
+  .then(response => response.data)
+  .catch(function (error) {
+    console.log(error);
+  })
+
+export const incrementPostVote = (id) =>
+  axios.post(`posts/${id}`,{option:'upVote'})
+  .then(response => response.data)
+  .catch(function (error) {
+    console.log(error);
+  })
+export const decrementPostVote = (id) =>
+  axios.post(`posts/${id}`,{option:'downVote'})
+  .then(response => response.data)
+  .catch(function (error) {
+    console.log(error);
+  })
+
+export const incrementCommentVote = (id) =>
+  axios.post(`comments/${id}`,{option:'upVote'})
+  .then(response => response.data)
+  .catch(function (error) {
+    console.log(error);
+  })
+export const decrementCommentVote = (id) =>
+  axios.post(`comments/${id}`,{option:'downVote'})
   .then(response => response.data)
   .catch(function (error) {
     console.log(error);

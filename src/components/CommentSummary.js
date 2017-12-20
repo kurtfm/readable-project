@@ -1,30 +1,43 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import CommentVote from './CommentVote'
 
 class CommentsSummary extends Component {
     static propTypes = {
-        body:PropTypes.string.isRequired,
-        author:PropTypes.string.isRequired,
         id:PropTypes.string.isRequired,
-        voteScore:PropTypes.number.isRequired
     }
 
     render(){
-        const { body, author, voteScore, id } = this.props
+        const { id } = this.props
+        const { body, author } = this.props.comments[id]
         return (
             <span>
                 <div>
                     <hr />
                     {body}<br />
                     by {author}<br />
-                    vote score: {voteScore}<br />
+                    <CommentVote id={id} />
                     <Link to={`/comments/update/${id}`}>update</Link><br />
-                    <Link to={`/post/${id}`}>delete</Link>
+                    <Link to={`/comments/delete/${id}`}>delete</Link>
                 </div>
             </span>
         )
     }
-
 }
-export default CommentsSummary
+function mapStateToProps (state) {
+    console.log('CommentsSummary mapStateToProps called')
+    return {
+        comments: state.comments,
+    }
+  }
+  function mapDispatchToProps (dispatch) {
+    return {
+    }
+  }
+
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(CommentsSummary)

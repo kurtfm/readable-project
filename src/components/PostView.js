@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getPost } from '../actions'
+import { getPost, getComments } from '../actions'
 import CommentsView from './CommentsView'
+import PostVote from './PostVote'
+import { Link } from 'react-router-dom'
 
 class PostView extends Component {
 
@@ -11,27 +13,28 @@ class PostView extends Component {
 
     componentDidMount() {
         this.props.getPost(this.id())
+        this.props.getComments(this.id())
       }
 
     render(){
         const {
             id,
-            timestamp,
             title,
             body,
             author,
             category,
-            voteScore,
             deleted,
             commentCount
         } = this.props.post
-        if(id){
+        if(id && !deleted){
             return (
                 <div>
+                    <Link to="/" >all posts</Link>
                     <h1> {title} </h1>
                     <h2> {author} </h2>
                     <p>{body}</p>
-                    <p>votes: {voteScore} </p>
+                    <p>{category}</p>
+                    <PostVote />
                     <p>comments: {commentCount} </p>
                     <CommentsView />
                 </div>
@@ -54,6 +57,7 @@ function mapStateToProps (state) {
   function mapDispatchToProps (dispatch) {
     return {
       getPost: (id) => dispatch(getPost(id)),
+      getComments: (id) => dispatch(getComments(id)),
     }
   }
 

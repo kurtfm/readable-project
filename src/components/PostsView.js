@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getPosts, getCategories, clearPost, clearComments } from '../actions'
+import { getPosts, clearPost, clearComments } from '../actions'
 import PostSummary from './PostSummary'
 import CategoriesHeader from './CategoriesHeader'
 import SortHeader from './SortHeader';
@@ -19,18 +19,13 @@ class PostsView extends Component {
             <div>
                 <SortHeader />
                 <CategoriesHeader />
+                {this.props.posts.length < 1 && (
+                    <div>no posts found</div>
+                )}
                 <ul>
-                {this.props.posts.map(({ id, title, body, author,commentCount,voteScore, deleted}) => (
+                {this.props.posts.map(({ id }) => (
                     <li key={id}>
-                        <PostSummary
-                            id={id}
-                            title={title}
-                            body={body}
-                            author={author}
-                            commentCount={commentCount}
-                            voteScore={voteScore}
-                            deleted={deleted}
-                            />
+                        <PostSummary id={id}/>
                     </li>
                 ))}
                 </ul>
@@ -49,53 +44,72 @@ function mapStateToProps (state) {
             return null
         }
     }) : []
-    const filterEnabled = state.hasOwnProperty('filter') && 
-        ( state.filter.hasOwnProperty('category') ||
-            state.filter.hasOwnProperty('sortBy') )
 
     const preppedPosts = (posts) => {
         let retArr = posts
         const {filter} = state
-        if(filter.hasOwnProperty('category') && filter.category !== null){
-            retArr = posts.filter((post) => (post.category === filter.category))
+        const { category, sortBy, orderBy } = state.filter
+        const orderByAscending = !filter.hasOwnProperty('orderBy') || (orderBy === 'ascending' || orderBy === null)
+
+        const sortByCharacters = (arr,key,asc) => (
+            arr.sort((a,b) => {
+                const str1 = a[key].toLowerCase().replace(/\s/g,'')
+                const str2 = b[key].toLowerCase().replace(/\s/g,'')
+                if(str1 < str2){
+                    return asc ? -1 : 1
+                }
+                if(str1 > str2){
+                    return asc ? 1 : -1
+                }
+                return 0
+            })
+        )
+        const sortByComparison = (arr,key,asc) => (
+            arr.sort((a,b) => {
+                const str1 = a[key]
+                const str2 = b[key]
+                if(str1 > str2){
+                    return asc ? -1 : 1
+                }
+                if(str1 < str2){
+                    return asc ? 1 : -1
+                }
+                return 0
+            })
+        )
+
+        const sortByTime = (arr,asc) => (
+            arr.sort((a,b) => {
+                return asc ? a.timestamp - b.timestamp :
+                    b.timestamp - a.timestamp
+            })
+        )
+
+        if(filter.hasOwnProperty('category') && category !== null){
+            retArr = posts.filter((post) => (post.category === category))
         }
         if(filter.hasOwnProperty('sortBy') && filter.sortBy !== null){
-            if(filter.sortBy === 'author'){
-                retArr = retArr.sort((a,b) => {
-                    const name1 = a.author.toLowerCase().replace(/\s/g,'')
-                    const name2 = b.author.toLowerCase().replace(/\s/g,'')
-                    if(name1 < name2){
-                        return -1
-                    }
-                    if(name1 > name2){
-                        return 1
-                    }
-                    return 0
-                })
+            switch(sortBy){
+                case 'time':
+                    retArr = sortByTime(retArr,orderByAscending)
+                    break
+                case 'votes':
+                    retArr = sortByComparison(retArr,'voteScore',orderByAscending)
+                    break
+                default:
+                    retArr = sortByCharacters(retArr,sortBy,orderByAscending)
+                    break
             }
-            if(filter.sortBy === 'timestamp'){
-                retArr = retArr.sort((a,b) => (a.timestamp - b.timestamp))
-            }
-            if(filter.sortBy === 'title' ){
-                retArr = retArr.sort((a,b) => {
-                    const title1 = a.title.toLowerCase().replace(/\s/g,'')
-                    const title2 = b.title.toLowerCase().replace(/\s/g,'')
-                    if(title1 < title2){
-                        return -1
-                    }
-                    if(title1 > title2){
-                        return 1
-                    }
-                    return 0
-                })
-            }
+        }
+        else{
+            retArr = sortByTime(retArr,false)
         }
 
         return retArr
     }
 
     return {
-        posts: filterEnabled ? preppedPosts(entriesArr) : entriesArr,
+        posts: preppedPosts(entriesArr),
     }
   }
 
