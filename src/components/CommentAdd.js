@@ -4,7 +4,7 @@ import { Form } from 'react-validify'
 import PropTypes from 'prop-types'
 import { addComment } from '../actions'
 import { getNewId } from '../utils/Helpers'
-import { Input } from './inputs'
+import { Input, TextArea, commentErrors, commentRules } from '../utils/FormValidationUtils'
 
 class CommentAdd extends Component {
 
@@ -25,18 +25,17 @@ class CommentAdd extends Component {
     render(){
         return(
             <Form
-                rules={{
-                    author: 'string|required|min:3',
-                    body: 'string|required|min:5',
-                    }}
+                rules={commentRules}
+                errorMessages={commentErrors}
             >
+            <h2>Add New Comment</h2>
             <label>
-              Author:
-              <Input type="text" name="author"/>
+              Your Name:
+              <Input type="text" name="author" />
             </label>
             <label>
-              Body:
-              <Input type="text" name="body" />
+              Comment:
+              <TextArea type="text" name="body" ></TextArea>
             </label>
             <button submit onClick={values => this.handleSubmit(values)}>Add</button>
             <button onClick={()=>(this.props.finishUpdate())}>Cancel</button>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Form } from 'react-validify'
-import { Input, Select } from './inputs';
+import { Input, Select, TextArea, postRules, postErrors } from '../utils/FormValidationUtils'
 import { editPost } from '../actions'
 
 
@@ -20,30 +20,27 @@ class PostUpdate extends Component {
       return(
         <Form
             onSubmit={this.handleSubmit}
-            rules={{
-                title: 'string|required|min:3',
-                author: 'string|required|min:3',
-                body: 'string|required|min:5',
-                category: 'in:react,redux,udacity|required'
-                }}
-              values={{
-                title,
-                author,
-                body,
-                category,
-              }}
+            rules={postRules}
+            errorMessages={postErrors}
+            values={{
+              title,
+              author,
+              body,
+              category,
+            }}
         >
+        <h2>Update Post</h2>
         <label>
-          Title:
+          Post Title:
           <Input type="text" name="title" />
         </label>
         <label>
-          Author:
-          <Input type="text" name="author" />
+          Your Post:
+          <TextArea type="text" name="body" ></TextArea>
         </label>
         <label>
-          Body:
-          <Input type="text" name="body" />
+          Your Name:
+          <Input type="text" name="author" />
         </label>
         <label>
           Category:<br />

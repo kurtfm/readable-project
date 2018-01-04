@@ -1,30 +1,34 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getPost, getComments } from '../actions'
+import { getPost, getComments, updateModalKey, removePost } from '../actions'
 import CommentsView from './CommentsView'
 import PostVote from './PostVote'
 import { Link } from 'react-router-dom'
 import Modal from 'react-modal'
+import { getNewModalKey } from '../utils/Helpers'
 import PostUpdate from './PostUpdate'
 import PostCommentAdd from './PostCommentAdd'
 
 class PostView extends Component {
     state = {
-        updateModalOpen: false,
+        modalKey: '',
       }
-      openUpdateModal = ({ meal, day }) => {
-        this.setState(() => ({
-          updateModalOpen: true,
-        }))
+      openModal = () => {
+        const newModalKey = getNewModalKey()
+        this.setState({modalKey: newModalKey})
+        this.props.updateModalKey(newModalKey)
       }
-      closeUpdateModal = () => {
-        this.setState(() => ({
-          updateModalOpen: false,
-        }))
+      closeModal = () => {
+        this.props.updateModalKey(null)
       }
 
     id() {
         return (this.props.match && this.props.match.params && this.props.match.params.id) || this.props.match.params.id;
+    }
+
+    removePost(id){
+        this.props.removePost(id)
+        this.props.history.goBack()
     }
 
     componentDidMount() {
@@ -42,25 +46,25 @@ class PostView extends Component {
             deleted,
             commentCount
         } = this.props.post
-        const { updateModalOpen } = this.state
         if(id && !deleted){
             return (
                 <div>
-                    <Link to="/" >all posts</Link>
+                    <Link to="/" >back to list</Link>
                     <h1> {title} </h1>
-                    <h2> {author} </h2>
+                    <h2> by: {author} </h2>
+                    <h4>category: {category}</h4>
                     <p>{body}</p>
-                    <p>{category}</p>
-                    <button onClick={this.openUpdateModal}>Update</button>
+                    <button onClick={this.openModal}>Update</button>
                     <Modal
                         className='modal'
                         overlayClassName='overlay'
-                        isOpen={updateModalOpen}
-                        onRequestClose={this.closeUpdateModal}
+                        isOpen={this.state.modalKey === this.props.modalKey}
+                        onRequestClose={this.closeModal}
                         contentLabel='Modal'
                     >
-                        <PostUpdate finishUpdate={this.closeUpdateModal} />
+                        <PostUpdate finishUpdate={this.closeModal} />
                     </Modal>
+                    <button onClick={()=>this.removePost(id)}>Delete</button>
                     <PostVote />
                     <PostCommentAdd id={id} />
                     <p>comments: {commentCount} </p>
@@ -78,7 +82,8 @@ class PostView extends Component {
 }
 function mapStateToProps (state) {
     return {
-        post: state.post
+        post: state.post,
+        modalKey: state.modal.key,
     }
   }
 
@@ -86,6 +91,8 @@ function mapStateToProps (state) {
     return {
       getPost: (id) => dispatch(getPost(id)),
       getComments: (id) => dispatch(getComments(id)),
+      updateModalKey: (key) => dispatch(updateModalKey(key)),
+      removePost: (id) => dispatch(removePost(id)),
     }
   }
 

@@ -49,7 +49,12 @@ export const postPost = ({ id, title, body, author, category, timestamp }) =>
   .catch((error) => {
     console.log(error);
   })
-
+  export const deletePost = (id) =>
+  axios.delete(`/posts/${id}`)
+  .then(response => response.data)
+  .catch((error) => {
+    console.log(error);
+  })
 export const getAllCategories = () =>
   axios.get('/categories')
   .then(response => response.data)

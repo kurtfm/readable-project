@@ -2,6 +2,7 @@ import { getAllPosts,
     getSinglePost,
     putPost,
     postPost,
+    deletePost,
     getAllCategories,
     getAllComments,
     putCommentEdit,
@@ -20,6 +21,7 @@ export const CLEAR_SORT = 'CLEAR_SORT'
 export const CLEAR_POSTS = 'CLEAR_POSTS'
 export const GET_POST = 'GET_POST'
 export const CLEAR_POST = 'CLEAR_POST'
+export const REMOVE_POST_IN_POSTS = 'REMOVE_POST_IN_POSTS'
 export const UPDATE_POST_IN_POSTS = 'UPDATE_POST_IN_POSTS'
 export const DOWNVOTE_POST = 'DOWNVOTE_POST'
 export const GET_COMMENTS = 'GET_COMMENTS'
@@ -32,6 +34,7 @@ export const INCREMENT_COMMENT_COUNT_IN_POSTS = 'INCREMENT_COMMENT_COUNT_IN_POST
 export const GET_CATEGORIES = 'GET_CATEGORIES'
 export const UPDATE_COMMENT_IN_COMMENTS = 'UPDATE_COMMENT_IN_COMMENTS'
 export const REMOVE_COMMENT_IN_COMMENTS = 'REMOVE_COMMENT_IN_COMMENTS'
+export const UPDATE_MODAL_KEY = 'UPDATE_MODAL_KEY'
 
 export function getPosts(){
     return function(dispatch, getState){
@@ -159,7 +162,20 @@ export function addPost(post){
           .catch()
     }
 }
-
+export function removePost(id){
+    return function(dispatch, getState){
+        deletePost(id).then((data)=> {
+            dispatch( removePostInPosts(data) )
+        })
+        .catch()
+    }
+}
+function removePostInPosts(post){
+    return {
+        type: REMOVE_POST_IN_POSTS,
+        id: post.id
+    }
+}
 export function getComments(id){
     return function(dispatch, getState){
         getAllComments(id).then((data) => {
@@ -205,7 +221,6 @@ export function removeComment(id){
     return function(dispatch, getState){
         const currentState = getState()
         deleteComment(id).then((data)=> {
-            console.log(currentState)
             dispatch( removeCommentInComments(data) )
             dispatch( decrementCommentCountInPost(data.parentId,currentState.post) )
             if(Object.keys(currentState.posts).length < 0){
@@ -272,5 +287,11 @@ export function commentDownVote(id){
         decrementCommentVote(id).then((data) => {
             dispatch(updateCommentInComments(data))
         })
+    }
+}
+export function updateModalKey(key){
+    return {
+        type: UPDATE_MODAL_KEY,
+        key
     }
 }

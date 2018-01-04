@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getPosts, clearPost, clearComments } from '../actions'
+import { getPosts, clearPost, clearComments, updateModalKey } from '../actions'
 import PostSummary from './PostSummary'
 import CategoriesHeader from './CategoriesHeader'
 import SortHeader from './SortHeader'
 import PostAdd from './PostAdd'
 import Modal from 'react-modal'
+import { getNewModalKey } from '../utils/Helpers'
 
 class PostsView extends Component {
 
@@ -15,20 +16,17 @@ class PostsView extends Component {
         this.props.clearComments()
     }
     state = {
-        addModalOpen: false,
-    }
-    openAddModal = ({ meal, day }) => {
-    this.setState(() => ({
-        addModalOpen: true,
-    }))
-    }
-    closeAddModal = () => {
-    this.setState(() => ({
-        addModalOpen: false,
-    }))
-    }
+        modalKey: '',
+      }
+      openModal = () => {
+        const newModalKey = getNewModalKey()
+        this.setState({modalKey: newModalKey})
+        this.props.updateModalKey(newModalKey)
+      }
+      closeModal = () => {
+        this.props.updateModalKey(null)
+      }
     render(){
-        const { addModalOpen } = this.state
         const categoryParam = (this.props.hasOwnProperty('match') &&
             this.props.match.hasOwnProperty('params') &&
             this.props.match.params.hasOwnProperty('category')) ?
@@ -37,15 +35,15 @@ class PostsView extends Component {
             <div>
                 <SortHeader />
                 <CategoriesHeader categoryParam={categoryParam} />
-                <button onClick={this.openAddModal}>Add New Post</button>
+                <button onClick={this.openModal}>Add New Post</button>
                 <Modal
                         className='modal'
                         overlayClassName='overlay'
-                        isOpen={addModalOpen}
-                        onRequestClose={this.closeAddModal}
+                        isOpen={this.state.modalKey === this.props.modalKey}
+                        onRequestClose={this.closeModal}
                         contentLabel='Modal'
                     >
-                        <PostAdd finishUpdate={this.closeAddModal} />
+                        <PostAdd finishUpdate={this.closeModal} />
                 </Modal>
                 {this.props.posts.length < 1 && (
                     <div>no posts found</div>
@@ -138,6 +136,7 @@ function mapStateToProps (state) {
 
     return {
         posts: preppedPosts(entriesArr),
+        modalKey: state.modal.key,
     }
   }
 
@@ -146,6 +145,7 @@ function mapStateToProps (state) {
       getPosts: () => dispatch(getPosts()),
       clearPost: () => dispatch(clearPost()),
       clearComments: () => dispatch(clearComments()),
+      updateModalKey: (key) => dispatch(updateModalKey(key)),
     }
   }
 

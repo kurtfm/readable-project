@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Form } from 'react-validify'
-import { Input } from './inputs';
+import { Input, TextArea, commentErrors, commentRules } from '../utils/FormValidationUtils'
 import { editComment } from '../actions'
 
 
@@ -24,22 +24,21 @@ class PostUpdate extends Component {
         const { author, body } = this.props
         return(
             <Form
-                rules={{
-                    author: 'string|required|min:3',
-                    body: 'string|required|min:5',
-                    }}
+                rules={commentRules}
+                errorMessages={commentErrors}
                 values={{
                     author,
                     body,
                 }}
             >
+            <h2>Update Comment</h2>
             <label>
                 Author:
                 <Input type="text" name="author" foo="bar"/>
             </label>
             <label>
                 Body:
-                <Input type="text" name="body" />
+                <TextArea type="text" name="body" ></TextArea>
             </label>
             <button submit onClick={values => this.handleSubmit(values)}>Add</button>
             <button onClick={()=>(this.props.finishUpdate())}>Cancel</button>

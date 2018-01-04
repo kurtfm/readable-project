@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import Modal from 'react-modal'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { getNewModalKey } from '../utils/Helpers'
+import { updateModalKey } from '../actions'
 import CommentAdd from './CommentAdd'
 
 class PostCommentAdd extends Component {
@@ -8,32 +11,29 @@ class PostCommentAdd extends Component {
         id:PropTypes.string.isRequired,
     }
     state = {
-        commentModalOpen: false,
+        modalKey: '',
       }
-      openCommentModal = ({ meal, day }) => {
-        this.setState(() => ({
-          commentModalOpen: true,
-        }))
+      openModal = () => {
+        const newModalKey = getNewModalKey()
+        this.setState({modalKey: newModalKey})
+        this.props.updateModalKey(newModalKey)
       }
-      closeCommentModal = () => {
-        this.setState(() => ({
-          commentModalOpen: false,
-        }))
+      closeModal = () => {
+        this.props.updateModalKey(null)
       }
 
     render(){
-        const { commentModalOpen } = this.state
         return (
             <div>
-                <button onClick={this.openCommentModal}>New Comment</button>
+                <button onClick={this.openModal}>New Comment</button>
                 <Modal
                     className='modal'
                     overlayClassName='overlay'
-                    isOpen={commentModalOpen}
-                    onRequestClose={this.closeCommentModal}
+                    isOpen={this.state.modalKey === this.props.modalKey}
+                    onRequestClose={this.closeModal}
                     contentLabel='Modal'
                 >
-                    <CommentAdd parentId={this.props.id} finishUpdate={this.closeCommentModal} />
+                    <CommentAdd parentId={this.props.id} finishUpdate={this.closeModal} />
                 </Modal>
             </div>
         )
@@ -41,4 +41,18 @@ class PostCommentAdd extends Component {
     }
 }
 
-export default PostCommentAdd
+function mapStateToProps (state) {
+    return {
+        modalKey: state.modal.key,
+    }
+  }
+  function mapDispatchToProps (dispatch) {
+    return {
+        updateModalKey: (key) => dispatch(updateModalKey(key)),
+    }
+  }
+
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(PostCommentAdd)

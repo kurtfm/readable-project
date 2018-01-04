@@ -9,16 +9,25 @@ class PostSummary extends Component {
         id:PropTypes.string.isRequired,
     }
 
+    getPostDetailsLink = (id)=>{
+        if(this.props.location.pathname === ('/' || '') ){
+            return `/post/${id}`
+        }
+        else{
+            return `${this.props.location.pathname}/${id}`
+        }
+    }
+
     render(){
         const { id } = this.props
         const { title, author, voteScore, commentCount } = this.props.posts[id]
         return (
             <div>
-            {title}<br />
-            by {author}<br />
+            <h2>{title}</h2>
+            <h4>by: {author}</h4>
             comments: {commentCount}<br />
             vote score: {voteScore}<br />
-            <Link to={`${this.props.location.pathname}/${id}`}>details</Link>
+            <Link to={this.getPostDetailsLink(id)}>View Post</Link>
             </div>
         )
     }

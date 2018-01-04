@@ -9,6 +9,7 @@ import {
     CLEAR_POSTS,
     GET_POST,
     CLEAR_POST,
+    REMOVE_POST_IN_POSTS,
     GET_COMMENTS,
     CLEAR_COMMENTS,
     GET_CATEGORIES,
@@ -19,6 +20,7 @@ import {
     INCREMENT_COMMENT_COUNT_IN_POST,
     DECREMENT_COMMENT_COUNT_IN_POSTS,
     INCREMENT_COMMENT_COUNT_IN_POSTS,
+    UPDATE_MODAL_KEY,
   } from '../actions'
 
 function posts(state = {}, action){
@@ -82,6 +84,11 @@ function posts(state = {}, action){
             let postsForIncrement = Object.assign({},action.posts)
             postsForIncrement[action.id].commentCount++
             return postsForIncrement
+        case REMOVE_POST_IN_POSTS:
+            let removePost = {}
+            Object.assign(removePost,state)
+            delete removePost[action.id]
+            return removePost
         default:
             return state
     }
@@ -171,7 +178,6 @@ function comments(state={}, action){
                     deleted
                 }}
         case REMOVE_COMMENT_IN_COMMENTS:
-        console.log('remove comment in comments called with',action)
             let removeComment = {}
             Object.assign(removeComment,state)
             delete removeComment[action.id]
@@ -196,10 +202,19 @@ function categories(state = {}, action){
     }
 }
 
+function modal(state = {}, action){
+    switch(action.type){
+        case UPDATE_MODAL_KEY:
+            return {key:action.key}
+        default:
+            return state
+    }
+}
 export default combineReducers({
     posts,
     filter,
     post,
     categories,
     comments,
+    modal,
 })
