@@ -29,10 +29,13 @@ class PostsView extends Component {
     }
     render(){
         const { addModalOpen } = this.state
+        const categoryParam = (this.props.hasOwnProperty('match') &&
+        this.props.match.hasOwnProperty('params') &&
+        this.props.match.params.hasOwnProperty('category')) ? this.props.match.params.category : ''
         return (
             <div>
                 <SortHeader />
-                <CategoriesHeader />
+                <CategoriesHeader categoryParam={categoryParam} />
                 <button onClick={this.openAddModal}>Add New Post</button>
                 <Modal
                         className='modal'

@@ -28,18 +28,21 @@ class App extends Component {
             <Route exact path='/' render={() => (
               <PostsView />
             )}/>
-          <Route path='/post/:id' render={(props,history) => (
-            <PostView {...props} />
-          )}/>
-          <Route path='*' exact={true} render={() => (
-            <div>
-              <div className="missing-view">
-                Sorry! The page you are looking for can't be found.
-                Here are your book shelves instead:
+            <Route path='/category/:category' render={(props,history) => (
+              <PostsView {...props} />
+            )}/>
+            <Route path='/post/:id' render={(props,history) => (
+              <PostView {...props} />
+            )}/>
+            <Route path='*' exact={true} render={() => (
+              <div>
+                <div className="missing-view">
+                  Sorry! The page you are looking for can't be found.
+                  Here are your book shelves instead:
+                </div>
+                <PostsView />
               </div>
-              <PostsView />
-            </div>
-          )}/>
+            )}/>
         </Switch>
         </div>
       </Provider>

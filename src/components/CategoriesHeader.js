@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import { getCategories, filterPosts, clearFilter } from '../actions'
 
 class CategoriesHeader extends Component {
-    state = {
-        category: this.categoryHasBeenSet ? this.props.filter.category : '',
+    static propTypes = {
+        categoryParam:PropTypes.string.isRequired,
     }
 
-    categoryHasBeenSet(){
-        return this.props.filter.hasOwnProperty('category') && this.props.filter.category !== null
+    state = {
+        category: (this.props.filter.hasOwnProperty('category') &&
+        this.props.filter.category !== null) ? this.props.filter.category : this.props.categoryParam
     }
 
     handleFilterChange(event){
@@ -21,6 +23,7 @@ class CategoriesHeader extends Component {
     }
     componentDidMount() {
         this.props.getCategories()
+        this.props.filterPosts(this.state.category)
     }
 
     render(){
@@ -33,7 +36,7 @@ class CategoriesHeader extends Component {
                         <option key={index} value={category} >{category}</option>
                     ))}
                 </select>
-                { this.categoryHasBeenSet() && (
+                { this.state.category !== '' && (
                     <button onClick={() => this.handleFilterClear()}>Clear Filter</button>
                 )}
             </div>
