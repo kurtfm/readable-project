@@ -3,7 +3,9 @@ import { connect } from 'react-redux'
 import { getPosts, clearPost, clearComments } from '../actions'
 import PostSummary from './PostSummary'
 import CategoriesHeader from './CategoriesHeader'
-import SortHeader from './SortHeader';
+import SortHeader from './SortHeader'
+import PostAdd from './PostAdd'
+import Modal from 'react-modal'
 
 class PostsView extends Component {
 
@@ -12,13 +14,35 @@ class PostsView extends Component {
         this.props.clearPost()
         this.props.clearComments()
     }
-
+    state = {
+        addModalOpen: false,
+    }
+    openAddModal = ({ meal, day }) => {
+    this.setState(() => ({
+        addModalOpen: true,
+    }))
+    }
+    closeAddModal = () => {
+    this.setState(() => ({
+        addModalOpen: false,
+    }))
+    }
     render(){
-
+        const { addModalOpen } = this.state
         return (
             <div>
                 <SortHeader />
                 <CategoriesHeader />
+                <button onClick={this.openAddModal}>Add New Post</button>
+                <Modal
+                        className='modal'
+                        overlayClassName='overlay'
+                        isOpen={addModalOpen}
+                        onRequestClose={this.closeAddModal}
+                        contentLabel='Modal'
+                    >
+                        <PostAdd finishUpdate={this.closeAddModal} />
+                </Modal>
                 {this.props.posts.length < 1 && (
                     <div>no posts found</div>
                 )}

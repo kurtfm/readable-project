@@ -24,7 +24,7 @@ class PostSummary extends Component {
 }
 function mapStateToProps (state) {
     return {
-        post: state.post,
+        posts: state.posts,
     }
   }
   function mapDispatchToProps (dispatch) {

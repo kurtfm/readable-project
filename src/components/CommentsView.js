@@ -20,7 +20,6 @@ class CommentsView extends Component {
     }
 }
 function mapStateToProps (state) {
-    console.log('CommentsView mapStateToProps called')
     const entries = state.comments
     return {
         comments: Object.keys(entries)[0] ? Object.keys(entries).map(id => {

@@ -3,19 +3,40 @@ import { connect } from 'react-redux'
 import { getCategories, filterPosts, clearFilter } from '../actions'
 
 class CategoriesHeader extends Component {
+    state = {
+        category: this.categoryHasBeenSet ? this.props.filter.category : '',
+    }
 
+    categoryHasBeenSet(){
+        return this.props.filter.hasOwnProperty('category') && this.props.filter.category !== null
+    }
+
+    handleFilterChange(event){
+        this.setState({category:event.target.value})
+        this.props.filterPosts(event.target.value)
+    }
+    handleFilterClear(){
+        this.setState({category:''})
+        this.props.clearFilter()
+    }
     componentDidMount() {
         this.props.getCategories()
     }
 
     render(){
         return (
-            <ul>
-                {this.props.categories.map((category,index) => (
-                    <li key={index}><button onClick={() => this.props.filterPosts(category)}>{category}</button></li>
-                ))}
-                <li><button onClick={() => this.props.clearFilter()}>Clear Filter</button></li>
-            </ul>
+            <div>
+                Filter by category:
+                <select value={this.state.category} onChange={(event) => this.handleFilterChange(event)}>
+                    <option value=""></option>
+                    {this.props.categories.map((category,index) => (
+                        <option key={index} value={category} >{category}</option>
+                    ))}
+                </select>
+                { this.categoryHasBeenSet() && (
+                    <button onClick={() => this.handleFilterClear()}>Clear Filter</button>
+                )}
+            </div>
         )
     }
 }
@@ -23,6 +44,7 @@ class CategoriesHeader extends Component {
 function mapStateToProps (state) {
     return {
         categories: Object.keys(state.categories),
+        filter: state.filter
     }
   }
 

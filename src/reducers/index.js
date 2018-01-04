@@ -14,6 +14,11 @@ import {
     GET_CATEGORIES,
     UPDATE_POST_IN_POSTS,
     UPDATE_COMMENT_IN_COMMENTS,
+    REMOVE_COMMENT_IN_COMMENTS,
+    DECREMENT_COMMENT_COUNT_IN_POST,
+    INCREMENT_COMMENT_COUNT_IN_POST,
+    DECREMENT_COMMENT_COUNT_IN_POSTS,
+    INCREMENT_COMMENT_COUNT_IN_POSTS,
   } from '../actions'
 
 function posts(state = {}, action){
@@ -69,6 +74,14 @@ function posts(state = {}, action){
                     deleted,
                     commentCount,
                 }}
+        case DECREMENT_COMMENT_COUNT_IN_POSTS:
+            let postsForDecrement = Object.assign({},action.posts)
+            postsForDecrement[action.id].commentCount--
+            return postsForDecrement
+        case INCREMENT_COMMENT_COUNT_IN_POSTS:
+            let postsForIncrement = Object.assign({},action.posts)
+            postsForIncrement[action.id].commentCount++
+            return postsForIncrement
         default:
             return state
     }
@@ -94,6 +107,14 @@ function post(state= {}, action){
     switch(action.type){
         case GET_POST:
             return action.post ? action.post : state
+        case DECREMENT_COMMENT_COUNT_IN_POST:
+            let postForDecrement = Object.assign({},action.post)
+            postForDecrement.commentCount--
+            return postForDecrement
+        case INCREMENT_COMMENT_COUNT_IN_POST:
+            let postForIncrement = Object.assign({},action.post)
+            postForIncrement.commentCount++
+            return postForIncrement
         case CLEAR_POST:
             return {}
         default:
@@ -104,7 +125,7 @@ function post(state= {}, action){
 function comments(state={}, action){
     switch(action.type){
         case GET_COMMENTS:
-            let comments = {}
+            let getComments = {}
             action.comments.forEach(({
                 id,
                 timestamp,
@@ -115,7 +136,7 @@ function comments(state={}, action){
                 voteScore,
                 deleted,
                 }) =>{
-                    comments[id] = {
+                    getComments[id] = {
                         id,
                         timestamp,
                         author,
@@ -127,7 +148,7 @@ function comments(state={}, action){
                     }
                 }
             )
-            return comments
+            return getComments
         case UPDATE_COMMENT_IN_COMMENTS:
             const {
                 id,
@@ -139,7 +160,6 @@ function comments(state={}, action){
                 voteScore,
                 deleted
             } = action.comment
-            console.log(id)
             return {...state,
                 [id]: {
                     timestamp,
@@ -150,6 +170,12 @@ function comments(state={}, action){
                     voteScore,
                     deleted
                 }}
+        case REMOVE_COMMENT_IN_COMMENTS:
+        console.log('remove comment in comments called with',action)
+            let removeComment = {}
+            Object.assign(removeComment,state)
+            delete removeComment[action.id]
+            return removeComment
         case CLEAR_COMMENTS:
             return {}
         default:

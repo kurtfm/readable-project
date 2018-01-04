@@ -4,21 +4,44 @@ import { sortPosts, orderPosts, clearSort } from '../actions'
 
 class SortHeader extends Component {
 
+    state = {
+        sortBy: this.sortByHasBeenSet ? this.props.filter.sortBy : '',
+    }
+
+    sortByHasBeenSet(){
+        return this.props.filter.hasOwnProperty('sortBy') && this.props.filter.sortBy !== null
+    }
+
+    handleSortChange(event){
+        this.setState({sortBy:event.target.value})
+        this.props.sortPosts(event.target.value) 
+    }
+    handleSortClear(){
+        this.setState({sortBy:''})
+        this.props.clearSort()
+    }
+
     render(){
         return (
-            <ul>
-                {['time','author','title','votes'].map((method,index) => (
-                    <li key={index}><button onClick={() => this.props.sortPosts(method)}>{method}</button></li>
-                ))}
-                {(this.props.filter.hasOwnProperty('sortBy') && this.props.filter.sortBy !== null) && (
-                    <ul>
-                        {['ascending','descending'].map((order,index) => (
-                            <li key={index}><button onClick={() => this.props.orderPosts(order)}>{order}</button></li>
-                        ))}
-                    </ul>
+            <div>
+                Sort by:
+                <select value={this.state.sortBy} onChange={(event) => this.handleSortChange(event)}>
+                    <option value=""></option>
+                    {['time','author','title','votes'].map((method,index) => (
+                        <option key={index} value={method}>{method}</option>
+                    ))}
+                </select>
+                { this.sortByHasBeenSet() && (
+                    <div>
+                        <select onChange={(event) => this.props.orderPosts(event.target.value)}>
+                            {['ascending','descending'].map((order,index) => (
+                                <option key={index} value={order}>{order}</option>
+                            ))}
+                        </select>
+                        <button onClick={() => this.handleSortClear()} >Clear Sorting</button>
+                    </div>
                 )}
-                <li><button onClick={() => this.props.clearSort()}>Clear Sorting</button></li>
-            </ul>
+            </div>
         )
     }
 }

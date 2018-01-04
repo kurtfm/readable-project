@@ -5,8 +5,23 @@ import CommentsView from './CommentsView'
 import PostVote from './PostVote'
 import { Link } from 'react-router-dom'
 import Modal from 'react-modal'
+import PostUpdate from './PostUpdate'
+import PostCommentAdd from './PostCommentAdd'
 
 class PostView extends Component {
+    state = {
+        updateModalOpen: false,
+      }
+      openUpdateModal = ({ meal, day }) => {
+        this.setState(() => ({
+          updateModalOpen: true,
+        }))
+      }
+      closeUpdateModal = () => {
+        this.setState(() => ({
+          updateModalOpen: false,
+        }))
+      }
 
     id() {
         return (this.props.match && this.props.match.params && this.props.match.params.id) || this.props.match.params.id;
@@ -27,6 +42,7 @@ class PostView extends Component {
             deleted,
             commentCount
         } = this.props.post
+        const { updateModalOpen } = this.state
         if(id && !deleted){
             return (
                 <div>
@@ -35,18 +51,20 @@ class PostView extends Component {
                     <h2> {author} </h2>
                     <p>{body}</p>
                     <p>{category}</p>
+                    <button onClick={this.openUpdateModal}>Update</button>
+                    <Modal
+                        className='modal'
+                        overlayClassName='overlay'
+                        isOpen={updateModalOpen}
+                        onRequestClose={this.closeUpdateModal}
+                        contentLabel='Modal'
+                    >
+                        <PostUpdate finishUpdate={this.closeUpdateModal} />
+                    </Modal>
                     <PostVote />
+                    <PostCommentAdd id={id} />
                     <p>comments: {commentCount} </p>
                     <CommentsView />
-
-                    <Modal
-        className='modal'
-        overlayClassName='overlay'
-        contentLabel='Modal'
-      >
-       <span>modal open</span>
-      </Modal>
-
                 </div>
             )
         }
