@@ -25,15 +25,10 @@ class App extends Component {
       <Provider store={store}>
         <div className="App">
           <Switch>
-            <Route exact path='/' render={() => (
-              <PostsView />
-            )}/>
-            <Route path='/category/:category' render={(props,history) => (
-              <PostsView {...props} />
-            )}/>
-            <Route path='/post/:id' render={(props,history) => (
-              <PostView {...props} />
-            )}/>
+            <Route exact path='/' component={PostsView}/>
+            <Route exact path='/category/:category' component={PostsView}/>
+            <Route exact path='/category/:category/:id' component={PostView}/>
+            <Route path='/post/:id' component={PostView}/>
             <Route path='*' exact={true} render={() => (
               <div>
                 <div className="missing-view">

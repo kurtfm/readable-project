@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { withRouter } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
@@ -17,7 +18,7 @@ class PostSummary extends Component {
             by {author}<br />
             comments: {commentCount}<br />
             vote score: {voteScore}<br />
-            <Link to={`/post/${id}`}>details</Link>
+            <Link to={`${this.props.location.pathname}/${id}`}>details</Link>
             </div>
         )
     }
@@ -32,7 +33,7 @@ function mapStateToProps (state) {
     }
   }
 
-  export default connect(
+  export default withRouter(connect(
     mapStateToProps,
     mapDispatchToProps
-  )(PostSummary)
+  )(PostSummary))

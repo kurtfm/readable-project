@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { getCategories, filterPosts, clearFilter } from '../actions'
 
@@ -14,16 +15,29 @@ class CategoriesHeader extends Component {
     }
 
     handleFilterChange(event){
-        this.setState({category:event.target.value})
-        this.props.filterPosts(event.target.value)
+        const category = event.target.value
+        this.setState({category})
+        this.props.filterPosts(category)
+        this.updateCategoryPath(category)
     }
     handleFilterClear(){
         this.setState({category:''})
         this.props.clearFilter()
+        this.updateCategoryPath('')
+    }
+    updateCategoryPath(category){
+        if(category === ''){
+            this.props.history.push(`/`)
+        }
+        else{
+            this.props.history.push(`/category/${category}`)
+        }
     }
     componentDidMount() {
         this.props.getCategories()
-        this.props.filterPosts(this.state.category)
+        if(this.state.category !== ''){
+            this.props.filterPosts(this.state.category)
+        }
     }
 
     render(){
@@ -59,7 +73,7 @@ function mapStateToProps (state) {
     }
   }
 
-  export default connect(
+  export default withRouter(connect(
     mapStateToProps,
     mapDispatchToProps
-  )(CategoriesHeader)
+  )(CategoriesHeader))
