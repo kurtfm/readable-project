@@ -35,7 +35,7 @@ class CommentsSummary extends Component {
                     <button onClick={this.openModal}>Update</button>
                     <Modal
                         className='modal'
-                        overlayClassName='overlay'
+                        overlayClassName='modal-overlay'
                         isOpen={this.state.modalKey === this.props.modalKey}
                         onRequestClose={this.closeModal}
                         contentLabel='Modal'

@@ -9,7 +9,8 @@ class SortHeader extends Component {
     }
 
     sortByHasBeenSet(){
-        return this.props.filter.hasOwnProperty('sortBy') && this.props.filter.sortBy !== null
+        return this.props.filter.hasOwnProperty('sortBy') &&
+            this.props.filter.sortBy !== null
     }
 
     handleSortChange(event){
@@ -24,9 +25,8 @@ class SortHeader extends Component {
     render(){
         return (
             <div>
-                Sort by:
                 <select value={this.state.sortBy} onChange={(event) => this.handleSortChange(event)}>
-                    <option value=""></option>
+                    <option value="">Sort By:</option>
                     {['time','author','title','votes'].map((method,index) => (
                         <option key={index} value={method}>{method}</option>
                     ))}

@@ -7,6 +7,8 @@ import SortHeader from './SortHeader'
 import PostAdd from './PostAdd'
 import Modal from 'react-modal'
 import { getNewModalKey } from '../utils/Helpers'
+//import CalendarIcon from 'react-icons/lib/fa/calendar-plus-o'
+//<CalendarIcon size={30}/>
 
 class PostsView extends Component {
 
@@ -32,29 +34,39 @@ class PostsView extends Component {
             this.props.match.params.hasOwnProperty('category')) ?
             this.props.match.params.category : ''
         return (
-            <div>
-                <SortHeader />
-                <CategoriesHeader categoryParam={categoryParam} />
-                <button onClick={this.openModal}>Add New Post</button>
+            <div className="main-page">
+                <div className="container">
+                    <div className="row">
+                        <section className="one-third column">
+                            <h1 className="title">Readable Project</h1>
+                            <span className="sub-title">Create a post, comment, and vote.</span>
+                        </section>
+                        <section className="two-thirds column">
+                            <button className="add-post-button" onClick={this.openModal}>
+                                Add New Post
+                            </button>
+                            <div className="list-utilities">
+                                <CategoriesHeader categoryParam={categoryParam} />
+                                <SortHeader />
+                            </div>
+                            {this.props.posts.length < 1 && (
+                            <div>no posts found</div>
+                            )}
+                            {this.props.posts.map(({ id }) => (
+                                <PostSummary id={id} key={id}/>
+                            ))}
+                        </section>
+                    </div>
+                </div>
                 <Modal
-                        className='modal'
-                        overlayClassName='overlay'
-                        isOpen={this.state.modalKey === this.props.modalKey}
-                        onRequestClose={this.closeModal}
-                        contentLabel='Modal'
-                    >
-                        <PostAdd finishUpdate={this.closeModal} />
+                    className='modal'
+                    overlayClassName='modal-overlay'
+                    isOpen={this.state.modalKey === this.props.modalKey}
+                    onRequestClose={this.closeModal}
+                    contentLabel='Add New Post'
+                >
+                    <PostAdd finishUpdate={this.closeModal} />
                 </Modal>
-                {this.props.posts.length < 1 && (
-                    <div>no posts found</div>
-                )}
-                <ul>
-                {this.props.posts.map(({ id }) => (
-                    <li key={id}>
-                        <PostSummary id={id}/>
-                    </li>
-                ))}
-                </ul>
             </div>
         )
     }

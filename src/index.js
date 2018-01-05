@@ -4,7 +4,9 @@ import { BrowserRouter } from 'react-router-dom'
 import registerServiceWorker from './registerServiceWorker'
 import Modal from 'react-modal'
 import App from './components/App'
-import './style/index.css'
+import './style/normalize.css'
+import './style/skeleton.css'
+import './style/custom.css'
 
 Modal.setAppElement('body')
 

@@ -28,7 +28,7 @@ class PostCommentAdd extends Component {
                 <button onClick={this.openModal}>New Comment</button>
                 <Modal
                     className='modal'
-                    overlayClassName='overlay'
+                    overlayClassName='modal-overlay'
                     isOpen={this.state.modalKey === this.props.modalKey}
                     onRequestClose={this.closeModal}
                     contentLabel='Modal'

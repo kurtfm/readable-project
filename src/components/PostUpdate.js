@@ -31,11 +31,11 @@ class PostUpdate extends Component {
         >
         <h2>Update Post</h2>
         <label>
-          Post Title:
+          Title:
           <Input type="text" name="title" />
         </label>
         <label>
-          Your Post:
+          Content:
           <TextArea type="text" name="body" ></TextArea>
         </label>
         <label>
@@ -51,7 +51,7 @@ class PostUpdate extends Component {
                 <option value="udacity">Udacity</option>
             </Select>
         </label>
-        <button submit onClick={values => this.handleSubmit(values)}>Add</button>
+        <button submit onClick={values => this.handleSubmit(values)}>Update</button>
         <button onClick={()=>(this.props.finishUpdate())}>Cancel</button>
       </Form>
     )

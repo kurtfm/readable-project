@@ -53,11 +53,11 @@ class PostView extends Component {
                     <h1> {title} </h1>
                     <h2> by: {author} </h2>
                     <h4>category: {category}</h4>
-                    <p>{body}</p>
+                    <div style={{whiteSpace: 'pre-wrap'}}>{body}</div>
                     <button onClick={this.openModal}>Update</button>
                     <Modal
                         className='modal'
-                        overlayClassName='overlay'
+                        overlayClassName='modal-overlay'
                         isOpen={this.state.modalKey === this.props.modalKey}
                         onRequestClose={this.closeModal}
                         contentLabel='Modal'

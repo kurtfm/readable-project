@@ -43,9 +43,8 @@ class CategoriesHeader extends Component {
     render(){
         return (
             <div>
-                Filter by category:
                 <select value={this.state.category} onChange={(event) => this.handleFilterChange(event)}>
-                    <option value=""></option>
+                    <option value="">Filter By:</option>
                     {this.props.categories.map((category,index) => (
                         <option key={index} value={category} >{category}</option>
                     ))}

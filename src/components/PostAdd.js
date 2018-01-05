@@ -26,11 +26,11 @@ class PostAdd extends Component {
             >
             <h2>Add New Post</h2>
             <label>
-              Post Title:
+              Title:
               <Input type="text" name="title" />
             </label>
             <label>
-              Your Post:
+              Content:
               <TextArea type="text" name="body" ></TextArea>
             </label>
             <label>
