@@ -7,15 +7,15 @@ class CommentsView extends Component {
     render(){
         const {comments} = this.props
         return (
-            <div>
-                <ul>
+            <section>
                 {comments.map(({ id }) => (
-                    <li key={id}>
-                        <CommentSummary id={id} />
-                    </li>
+                    <div className="row" key={id}>
+                        <div className="twelve column" key={id}>
+                            <CommentSummary id={id} />
+                        </div>
+                    </div>
                 ))}
-                </ul>
-            </div>
+            </section>
         )
     }
 }

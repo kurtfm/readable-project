@@ -3,11 +3,16 @@ import { connect } from 'react-redux'
 import { getPost, getComments, updateModalKey, removePost } from '../actions'
 import CommentsView from './CommentsView'
 import PostVote from './PostVote'
-import { Link } from 'react-router-dom'
 import Modal from 'react-modal'
+import { withRouter } from 'react-router-dom'
 import { getNewModalKey } from '../utils/Helpers'
 import PostUpdate from './PostUpdate'
 import PostCommentAdd from './PostCommentAdd'
+import NavigateBackIcon from 'react-icons/lib/md/navigate-before'
+import PersonIcon from 'react-icons/lib/md/person'
+import TopicFolderIcon from 'react-icons/lib/go/file-submodule'
+import TrashIcon from 'react-icons/lib/fa/trash'
+import PencilIcon from 'react-icons/lib/fa/pencil-square'
 
 class PostView extends Component {
     state = {
@@ -46,15 +51,62 @@ class PostView extends Component {
             deleted,
             commentCount
         } = this.props.post
+
+        const commentCountPlural = commentCount === 1 ? '' : 's'
+
         if(id && !deleted){
             return (
-                <div>
-                    <Link to="/" >back to list</Link>
-                    <h1> {title} </h1>
-                    <h2> by: {author} </h2>
-                    <h4>category: {category}</h4>
-                    <div style={{whiteSpace: 'pre-wrap'}}>{body}</div>
-                    <button onClick={this.openModal}>Update</button>
+                <div className="post-page">
+                    <header>
+                        <button className="go-back de-button" onClick={()=>(this.props.history.goBack())} to="/" >
+                            <NavigateBackIcon size={40} color="grey" />
+                            Back
+                        </button>
+                    </header>
+                    <section className="post-view container">
+                        <div className="row">
+                            <div className="twelve columns">
+                                <div className="title">
+                                    <h1> {title} </h1>
+                                </div>
+                                <div className="meta">
+                                    <h4><PersonIcon size={30} color="grey" /> {author} </h4>
+                                    <h4><TopicFolderIcon size={25} color="grey" /> {category}</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="twelve columns">
+                                <div className="post-content">{body}</div>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="six columns post-actions">
+                                <button className="de-button" onClick={this.openModal}>
+                                    <PencilIcon size={20} color="grey" />
+                                </button>
+                                <button className="de-button" nClick={()=>this.removePost(id)}>
+                                    <TrashIcon size={20} color="grey" />
+                                </button>
+                            </div>
+                            <div className="six columns">&nbsp;</div>
+                        </div>
+                        <div className="row">
+                            <div className="seven columns">&nbsp;</div>
+                            <div className="five columns">
+                                <PostVote />
+                            </div>
+                        </div>
+                    </section>
+                    <section className="comments-view container">
+                        <div className="row">
+                            <div className="twelve columns">
+                                <PostCommentAdd id={id} />
+                                <h4>{`${commentCount} comment${commentCountPlural}`}</h4>
+                            </div>
+                        </div>
+                        <CommentsView />
+                    </section>
                     <Modal
                         className='modal'
                         overlayClassName='modal-overlay'
@@ -64,11 +116,6 @@ class PostView extends Component {
                     >
                         <PostUpdate finishUpdate={this.closeModal} />
                     </Modal>
-                    <button onClick={()=>this.removePost(id)}>Delete</button>
-                    <PostVote />
-                    <PostCommentAdd id={id} />
-                    <p>comments: {commentCount} </p>
-                    <CommentsView />
                 </div>
             )
         }
@@ -96,7 +143,7 @@ function mapStateToProps (state) {
     }
   }
 
-  export default connect(
+  export default withRouter(connect(
     mapStateToProps,
     mapDispatchToProps
-  )(PostView)
+  )(PostView))

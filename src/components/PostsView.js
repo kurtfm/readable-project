@@ -7,8 +7,8 @@ import SortHeader from './SortHeader'
 import PostAdd from './PostAdd'
 import Modal from 'react-modal'
 import { getNewModalKey } from '../utils/Helpers'
-//import CalendarIcon from 'react-icons/lib/fa/calendar-plus-o'
-//<CalendarIcon size={30}/>
+import ListIcon from 'react-icons/lib/fa/list'
+import BookIcon from 'react-icons/lib/go/book'
 
 class PostsView extends Component {
 
@@ -37,15 +37,17 @@ class PostsView extends Component {
             <div className="main-page">
                 <div className="container">
                     <div className="row">
-                        <section className="one-third column">
-                            <h1 className="title">Readable Project</h1>
-                            <span className="sub-title">Create a post, comment, and vote.</span>
+                        <section className="one-third column left-titles">
+                            <BookIcon size={60} color="rgb(115, 131, 165)" />
+                            <h1 className="title">Reada.bl</h1>
+                            <span className="sub-title">Read, create and respond.</span>
                         </section>
-                        <section className="two-thirds column">
+                        <section className="two-thirds column posts-list">
                             <button className="add-post-button" onClick={this.openModal}>
                                 Add New Post
                             </button>
                             <div className="list-utilities">
+                                <ListIcon size={40} color="grey" />
                                 <CategoriesHeader categoryParam={categoryParam} />
                                 <SortHeader />
                             </div>

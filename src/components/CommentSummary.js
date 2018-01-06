@@ -26,30 +26,31 @@ class CommentsSummary extends Component {
         const { id } = this.props
         const { body, author } = this.props.comments[id]
         return (
-            <span>
-                <div>
-                    <hr />
-                    {body}<br />
-                    by {author}<br />
-                    <CommentVote id={id} />
-                    <button onClick={this.openModal}>Update</button>
-                    <Modal
-                        className='modal'
-                        overlayClassName='modal-overlay'
-                        isOpen={this.state.modalKey === this.props.modalKey}
-                        onRequestClose={this.closeModal}
-                        contentLabel='Modal'
-                    >
-                        <CommentUpdate
-                            id={id}
-                            author={author}
-                            body={body}
-                            finishUpdate={this.closeModal}
-                        />
-                    </Modal>
-                    <button onClick={()=>(this.props.removeComment(id))}>delete</button>
+            <div className="comment-summary">
+                <div className="comment-author">
+                    {author}:
                 </div>
-            </span>
+                <div className="comment-content">
+                    {body}
+                </div>
+                <CommentVote id={id} />
+                <button onClick={this.openModal}>Update</button>
+                <button onClick={()=>(this.props.removeComment(id))}>delete</button>
+                <Modal
+                    className='modal'
+                    overlayClassName='modal-overlay'
+                    isOpen={this.state.modalKey === this.props.modalKey}
+                    onRequestClose={this.closeModal}
+                    contentLabel='Modal'
+                >
+                    <CommentUpdate
+                        id={id}
+                        author={author}
+                        body={body}
+                        finishUpdate={this.closeModal}
+                    />
+                </Modal>
+            </div>
         )
     }
 }

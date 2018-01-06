@@ -3,7 +3,7 @@ import React from 'react';
 export const Input = ({ error, ...props }) => {
   return (
     <div>
-      <p>{error}</p>
+      <div className="validation-error">{error}</div>
       <input {...props} />
     </div>
   )
@@ -12,7 +12,7 @@ export const Input = ({ error, ...props }) => {
 export const TextArea = ({ error, ...props }) => {
   return (
     <div>
-      <p>{error}</p>
+      <div className="validation-error">{error}</div>
       <textarea {...props} />
     </div>
   )
@@ -21,7 +21,7 @@ export const TextArea = ({ error, ...props }) => {
 export const Select = ({ error, ...props }) => {
     return (
       <div>
-        <p>{error}</p>
+        <div className="validation-error">{error}</div>
         <select {...props} />
       </div>
     )

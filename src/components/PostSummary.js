@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import randomColor from 'randomcolor'
 import ChatBubble from 'react-icons/lib/md/chat-bubble-outline'
 import ThumbsUpDown from 'react-icons/lib/md/thumbs-up-down'
 class PostSummary extends Component {
@@ -33,8 +32,8 @@ class PostSummary extends Component {
                     <h4 className="post-meta">by: {author}</h4>
                 </div>
                 <div className="scores">
-                    <ChatBubble size={20} /> {commentCount}<br />
-                    <ThumbsUpDown size={20} /> {voteScore}<br />
+                    <p><ChatBubble size={20} /> {commentCount}</p>
+                    <p><ThumbsUpDown size={20} /> {voteScore}</p>
                 </div>
             </div>
         )

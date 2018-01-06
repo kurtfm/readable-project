@@ -25,29 +25,47 @@ class PostAdd extends Component {
                 errorMessages={postErrors}
             >
             <h2>Add New Post</h2>
-            <label>
-              Title:
-              <Input type="text" name="title" />
-            </label>
-            <label>
-              Content:
-              <TextArea type="text" name="body" ></TextArea>
-            </label>
+            <div className="row">
+              <div className="twelve columns">
+                <label>
+                  Title:
+                  <Input className="u-full-width" type="text" name="title" />
+                </label>
+              </div>
+            </div>
+            <div className="row">
+              <div className="twelve columns">
+              <label>
+                Content:
+                <TextArea  className="u-full-width" type="text" name="body" ></TextArea>
+              </label>
+              </div>
+            </div>
             <label>
               Your Name:
-              <Input type="text" name="author" />
+              <Input type="text"  className="u-full-width" name="author" />
             </label>
-            <label>
-              Category:<br />
-                <Select name="category" value="">
-                    <option value="">Choose One</option>
-                    <option value="react">React</option>
-                    <option value="redux">Redux</option>
-                    <option value="udacity">Udacity</option>
-                </Select>
-            </label>
-            <button submit onClick={values => this.handleSubmit(values)}>Add</button>
-            <button onClick={()=>(this.props.finishUpdate())}>Cancel</button>
+            <div className="row">
+              <div className="twelve columns">
+                <label>
+                  Category:<br />
+                    <Select className="u-full-width" name="category" value="">
+                        <option value="">Choose One</option>
+                        <option value="react">React</option>
+                        <option value="redux">Redux</option>
+                        <option value="udacity">Udacity</option>
+                    </Select>
+                </label>
+                </div>
+            </div>
+            <div className="row">
+              <div className="six columns">
+                <button className="button-primary" submit onClick={values => this.handleSubmit(values)}>Add</button>
+              </div>
+              <div className="six columns">
+                <button onClick={()=>(this.props.finishUpdate())}>Cancel</button>
+              </div>
+            </div>
           </Form>
         )
     }
