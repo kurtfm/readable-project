@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { commentUpVote, commentDownVote } from '../actions'
 import PropTypes from 'prop-types'
+import ThumbsUp from 'react-icons/lib/fa/thumbs-o-up'
+import ThumbsDown from 'react-icons/lib/fa/thumbs-o-down'
 
 class CommentVote extends Component {
     static propTypes = {
@@ -10,10 +12,16 @@ class CommentVote extends Component {
     render(){
         const id = this.props.id
         return(
-            <div>
-                Vote Score: {this.props.comments[id].voteScore}
-                <button  onClick={() => this.props.upVote(id)} >Up</button>
-                <button  onClick={() => this.props.downVote(id)} >Down</button>
+            <div className="comment-vote vote">
+                <button  className="de-button" onClick={() => this.props.upVote(id)} >
+                    <ThumbsUp size={20} color="grey" className="svg-flip" />
+                </button>
+                <div className="score">
+                    {this.props.comments[id].voteScore}
+                </div>
+                <button className="de-button" onClick={() => this.props.downVote(id)} >
+                    <ThumbsDown size={20} color="grey" />
+                </button>
             </div>
         )
     }

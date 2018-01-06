@@ -38,9 +38,8 @@ class PostsView extends Component {
                 <div className="container">
                     <div className="row">
                         <section className="one-third column left-titles">
-                            <BookIcon size={60} color="rgb(115, 131, 165)" />
-                            <h1 className="title">Reada.bl</h1>
-                            <span className="sub-title">Read, create and respond.</span>
+                            <h1 className="title"><BookIcon size={60} color="rgb(115, 131, 165)" /> Reada.bl</h1>
+                            <div className="sub-title">Read, create and respond.</div>
                         </section>
                         <section className="two-thirds column posts-list">
                             <button className="add-post-button" onClick={this.openModal}>

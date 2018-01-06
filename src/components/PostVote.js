@@ -1,22 +1,22 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { postUpVote, postDownVote } from '../actions'
-import ThumbsUp from 'react-icons/lib/fa/thumbs-up'
-import ThumbsDown from 'react-icons/lib/fa/thumbs-down'
+import ThumbsUp from 'react-icons/lib/fa/thumbs-o-up'
+import ThumbsDown from 'react-icons/lib/fa/thumbs-o-down'
+
 class PostVote extends Component {
 
     render(){
         return(
             <div className="post-vote vote">
-                
                 <button  className="de-button" onClick={() => this.props.upVote(this.props.id)} >
-                    <ThumbsUp size={50} color="grey" className="thumbsUp"/>
+                    <ThumbsUp size={30} color="grey" className="svg-flip" />
                 </button>
-                <div className="circle-greyblue-50 score">
+                <div className="score">
                     {this.props.score}
                 </div>
                 <button className="de-button" onClick={() => this.props.downVote(this.props.id)} >
-                    <ThumbsDown size={50} color="grey" className="thumbsDown"/>
+                    <ThumbsDown size={30} color="grey" />
                 </button>
             </div>
         )

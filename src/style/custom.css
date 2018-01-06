@@ -5,7 +5,7 @@ body {
 svg:hover{
     fill:rgb(90, 112, 161);
 }
-.vote .thumbsUp{
+.svg-flip{
     -moz-transform: scaleX(-1);
     -o-transform: scaleX(-1);
     -webkit-transform: scaleX(-1);
@@ -20,13 +20,12 @@ svg:hover{
 }
 .main-page .title{
     color: rgb(90, 112, 161);
-    float:left;
 }
 .main-page .left-titles svg{
     float:left;
 }
 .main-page .sub-title{
-    font-size: 20px;
+    font-size: 2rem;
 }
 .main-page .add-post-button{
     margin-left: 20px;
@@ -158,35 +157,52 @@ svg:hover{
     margin-top:20px;
 }
 .post-actions button{
-    margin-right:10px;
+    margin:0 5px;
 }
 .post-content{
-    white-space: pre-wrap;
     font-size: 2em;
+    padding:35px;
+}
+.comment-content{
+    font-size: 1em;
+    padding: 15px;
+}
+.post-content, .comment-content{
+    white-space: pre-wrap;
     color:darkslategrey;
     font-family: 'PT Serif', serif;
-    padding:35px;
     background-color:rgba(255, 255, 255, 0.5);
     -moz-box-shadow: 1px 2px 3px rgba(255, 255, 255, 0.5);
--webkit-box-shadow: 1px 2px 3px rgba(255, 255, 255, 0.5);
-box-shadow: 1px 2px 3px rgba(255, 255, 255, 0.5);
-}
-.post-vote{
-    font-size: 36px;
-}
-.vote button{
-    float:right;
+    -webkit-box-shadow: 1px 2px 3px rgba(255, 255, 255, 0.5);
+    box-shadow: 1px 2px 3px rgba(255, 255, 255, 0.5);
 }
 .score{
-    color:ghostwhite;
-    float:right;
-    text-align:center;
+    margin-top:8px;
+    font-size: 1.5rem;
+    color:grey;
 }
-.circle-greyblue-50 {
-        width: 50px;
-        height: 50px;
-        background:rgb(133, 143, 165);
-        -moz-border-radius: 50%;
-        -webkit-border-radius: 50%;
-        border-radius: 50%;
+.vote .score,
+.vote button,
+.vote svg{
+    float:left;
+}
+.comment-summary{
+    margin:10px;
+    padding:5px;
+    -moz-box-shadow: 1.5px 1.5px 3px #a8a8a8;
+    -webkit-box-shadow: 1.5px 1.5px 3px #a8a8a8;
+    box-shadow: 1.5px 1.5px 3px #a8a8a8;
+    -moz-border-radius: 3px 3px 3px 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px 3px 3px 3px;
+    background-color:rgb(228, 228, 228);
+}
+.comment-content{
+    margin:0 20px;
+}
+.comment-edit, .comment-remove{
+    margin-left:15px;
+}
+.comment-utilities{
+    margin-left:60%;
 }

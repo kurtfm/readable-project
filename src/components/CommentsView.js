@@ -10,9 +10,10 @@ class CommentsView extends Component {
             <section>
                 {comments.map(({ id }) => (
                     <div className="row" key={id}>
-                        <div className="twelve column" key={id}>
+                        <div className="six columns">
                             <CommentSummary id={id} />
                         </div>
+                        <div className="six columns"></div>
                     </div>
                 ))}
             </section>

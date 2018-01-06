@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { getNewModalKey } from '../utils/Helpers'
 import { updateModalKey } from '../actions'
 import CommentAdd from './CommentAdd'
+import CommentBubbleIcon from 'react-icons/lib/md/chat-bubble-outline'
 
 class PostCommentAdd extends Component {
     static propTypes = {
@@ -25,7 +26,9 @@ class PostCommentAdd extends Component {
     render(){
         return (
             <div>
-                <button onClick={this.openModal}>New Comment</button>
+                <button className="de-button" onClick={this.openModal}>
+                    <CommentBubbleIcon size={30} color="grey" /> Comment
+                </button>
                 <Modal
                     className='modal'
                     overlayClassName='modal-overlay'

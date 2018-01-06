@@ -6,7 +6,10 @@ import CommentVote from './CommentVote'
 import CommentUpdate from './CommentUpdate'
 import { getNewModalKey } from '../utils/Helpers'
 import { removeComment, updateModalKey } from '../actions'
-
+import PersonIcon from 'react-icons/lib/md/person'
+import TrashIcon from 'react-icons/lib/fa/trash-o'
+import PencilIcon from 'react-icons/lib/ti/pencil'
+import RightChevronIcon from 'react-icons/lib/md/chevron-right'
 class CommentsSummary extends Component {
     static propTypes = {
         id:PropTypes.string.isRequired,
@@ -28,14 +31,20 @@ class CommentsSummary extends Component {
         return (
             <div className="comment-summary">
                 <div className="comment-author">
-                    {author}:
+                    <PersonIcon size={20} color="grey" />{author}:
                 </div>
                 <div className="comment-content">
-                    {body}
+                    <RightChevronIcon size={30} color="grey" /> {body}
                 </div>
-                <CommentVote id={id} />
-                <button onClick={this.openModal}>Update</button>
-                <button onClick={()=>(this.props.removeComment(id))}>delete</button>
+                <div className="comment-utilities">
+                    <CommentVote id={id} />
+                    <button className="de-button comment-edit" onClick={this.openModal}>
+                        <PencilIcon size={20} color="grey"/>
+                    </button>
+                    <button className="de-button comment-remove" onClick={()=>(this.props.removeComment(id))}>
+                        <TrashIcon size={20} color="grey" />
+                    </button>
+                </div>
                 <Modal
                     className='modal'
                     overlayClassName='modal-overlay'

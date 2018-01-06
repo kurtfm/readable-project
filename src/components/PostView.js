@@ -11,8 +11,8 @@ import PostCommentAdd from './PostCommentAdd'
 import NavigateBackIcon from 'react-icons/lib/md/navigate-before'
 import PersonIcon from 'react-icons/lib/md/person'
 import TopicFolderIcon from 'react-icons/lib/go/file-submodule'
-import TrashIcon from 'react-icons/lib/fa/trash'
-import PencilIcon from 'react-icons/lib/fa/pencil-square'
+import TrashIcon from 'react-icons/lib/fa/trash-o'
+import PencilIcon from 'react-icons/lib/ti/pencil'
 
 class PostView extends Component {
     state = {
@@ -80,20 +80,21 @@ class PostView extends Component {
                                 <div className="post-content">{body}</div>
                             </div>
                         </div>
-                        <div className="row">
-                            <div className="six columns post-actions">
+                        <div className="row post-actions">
+                            <div className="two columns">
                                 <button className="de-button" onClick={this.openModal}>
-                                    <PencilIcon size={20} color="grey" />
-                                </button>
-                                <button className="de-button" nClick={()=>this.removePost(id)}>
-                                    <TrashIcon size={20} color="grey" />
+                                    <PencilIcon size={30} color="grey" /> Edit
                                 </button>
                             </div>
-                            <div className="six columns">&nbsp;</div>
-                        </div>
-                        <div className="row">
-                            <div className="seven columns">&nbsp;</div>
-                            <div className="five columns">
+                            <div className="two columns">
+                                <button className="de-button" onClick={()=>this.removePost(id)}>
+                                    <TrashIcon size={30} color="grey" /> Remove
+                                </button>
+                            </div>
+                            <div className="two columns">
+                                <PostCommentAdd id={id} />
+                            </div>
+                            <div className="six columns">
                                 <PostVote />
                             </div>
                         </div>
@@ -101,7 +102,6 @@ class PostView extends Component {
                     <section className="comments-view container">
                         <div className="row">
                             <div className="twelve columns">
-                                <PostCommentAdd id={id} />
                                 <h4>{`${commentCount} comment${commentCountPlural}`}</h4>
                             </div>
                         </div>

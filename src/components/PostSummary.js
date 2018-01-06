@@ -3,8 +3,10 @@ import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import ChatBubble from 'react-icons/lib/md/chat-bubble-outline'
-import ThumbsUpDown from 'react-icons/lib/md/thumbs-up-down'
+import ChatBubblesIcon from 'react-icons/lib/fa/comments'
+import ThumbsUpDownIcon from 'react-icons/lib/md/thumbs-up-down'
+import PersonIcon from 'react-icons/lib/md/person'
+
 class PostSummary extends Component {
     static propTypes = {
         id:PropTypes.string.isRequired,
@@ -29,11 +31,11 @@ class PostSummary extends Component {
                     <h2 className="post-title">
                         <Link to={this.getPostDetailsLink(id)}>{title}</Link>
                     </h2>
-                    <h4 className="post-meta">by: {author}</h4>
+                    <h4 className="post-meta"><PersonIcon size={30} color="grey" /> {author}</h4>
                 </div>
                 <div className="scores">
-                    <p><ChatBubble size={20} /> {commentCount}</p>
-                    <p><ThumbsUpDown size={20} /> {voteScore}</p>
+                    <p><ChatBubblesIcon size={20} color="grey"/> {commentCount}</p>
+                    <p><ThumbsUpDownIcon size={20} color="grey"/> {voteScore}</p>
                 </div>
             </div>
         )
