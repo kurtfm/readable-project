@@ -125,7 +125,7 @@ svg:hover{
     background-color:rgb(115, 131, 165);
     border-color: rgb(115, 131, 165);
 }
-.post-page .meta svg{
+.post-page .meta svg:hover{
     fill: grey;
 }
 .go-back{
