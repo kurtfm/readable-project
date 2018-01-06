@@ -23,30 +23,21 @@ class PostAdd extends Component {
             <Form
                 rules={postRules}
                 errorMessages={postErrors}
+                className="form-modal"
             >
             <h2>Add New Post</h2>
-            <div className="row">
-              <div className="twelve columns">
-                <label>
-                  Title:
-                  <Input className="u-full-width" type="text" name="title" />
-                </label>
-              </div>
-            </div>
-            <div className="row">
-              <div className="twelve columns">
+              <label>
+                Title:
+                <Input className="u-full-width" type="text" name="title" />
+              </label>
               <label>
                 Content:
                 <TextArea  className="u-full-width" type="text" name="body" ></TextArea>
               </label>
-              </div>
-            </div>
             <label>
               Your Name:
               <Input type="text"  className="u-full-width" name="author" />
             </label>
-            <div className="row">
-              <div className="twelve columns">
                 <label>
                   Category:<br />
                     <Select className="u-full-width" name="category" value="">
@@ -56,16 +47,8 @@ class PostAdd extends Component {
                         <option value="udacity">Udacity</option>
                     </Select>
                 </label>
-                </div>
-            </div>
-            <div className="row">
-              <div className="six columns">
                 <button className="button-primary" submit onClick={values => this.handleSubmit(values)}>Add</button>
-              </div>
-              <div className="six columns">
                 <button onClick={()=>(this.props.finishUpdate())}>Cancel</button>
-              </div>
-            </div>
           </Form>
         )
     }

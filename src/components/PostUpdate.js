@@ -28,19 +28,20 @@ class PostUpdate extends Component {
               body,
               category,
             }}
+            className="form-modal"
         >
         <h2>Update Post</h2>
         <label>
           Title:
-          <Input type="text" name="title" />
+          <Input className="u-full-width" type="text" name="title" />
         </label>
         <label>
           Content:
-          <TextArea type="text" name="body" ></TextArea>
+          <TextArea className="u-full-width" type="text" name="body" ></TextArea>
         </label>
         <label>
           Your Name:
-          <Input type="text" name="author" />
+          <Input className="u-full-width" type="text" name="author" />
         </label>
         <label>
           Category:<br />
@@ -51,7 +52,7 @@ class PostUpdate extends Component {
                 <option value="udacity">Udacity</option>
             </Select>
         </label>
-        <button submit onClick={values => this.handleSubmit(values)}>Update</button>
+        <button className="button-primary" submit onClick={values => this.handleSubmit(values)}>Update</button>
         <button onClick={()=>(this.props.finishUpdate())}>Cancel</button>
       </Form>
     )

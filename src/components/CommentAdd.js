@@ -27,17 +27,18 @@ class CommentAdd extends Component {
             <Form
                 rules={commentRules}
                 errorMessages={commentErrors}
+                className="form-modal"
             >
             <h2>Add New Comment</h2>
             <label>
               Your Name:
-              <Input type="text" name="author" />
+              <Input className="u-full-width" type="text" name="author" />
             </label>
             <label>
               Comment:
-              <TextArea type="text" name="body" ></TextArea>
+              <TextArea className="u-full-width" type="text" name="body" ></TextArea>
             </label>
-            <button submit onClick={values => this.handleSubmit(values)}>Add</button>
+            <button submit className="button-primary" onClick={values => this.handleSubmit(values)}>Add</button>
             <button onClick={()=>(this.props.finishUpdate())}>Cancel</button>
           </Form>
         )

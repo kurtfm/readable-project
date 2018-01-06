@@ -31,10 +31,10 @@ class CommentsSummary extends Component {
         return (
             <div className="comment-summary">
                 <div className="comment-author">
-                    <PersonIcon size={20} color="grey" />{author}:
+                    <PersonIcon className="svg-no-hover" size={20} color="grey" />{author}:
                 </div>
                 <div className="comment-content">
-                    <RightChevronIcon size={30} color="grey" /> {body}
+                    <RightChevronIcon className="svg-no-hover" size={30} color="grey" /> {body}
                 </div>
                 <div className="comment-utilities">
                     <CommentVote id={id} />

@@ -30,17 +30,18 @@ class PostUpdate extends Component {
                     author,
                     body,
                 }}
+                className="form-modal"
             >
             <h2>Update Comment</h2>
             <label>
                 Author:
-                <Input type="text" name="author" foo="bar"/>
+                <Input className="u-full-width" type="text" name="author" foo="bar"/>
             </label>
             <label>
                 Body:
-                <TextArea type="text" name="body" ></TextArea>
+                <TextArea className="u-full-width" type="text" name="body" ></TextArea>
             </label>
-            <button submit onClick={values => this.handleSubmit(values)}>Add</button>
+            <button className="button-primary" submit onClick={values => this.handleSubmit(values)}>Add</button>
             <button onClick={()=>(this.props.finishUpdate())}>Cancel</button>
         </Form>
         )

@@ -13,7 +13,7 @@ import PersonIcon from 'react-icons/lib/md/person'
 import TopicFolderIcon from 'react-icons/lib/go/file-submodule'
 import TrashIcon from 'react-icons/lib/fa/trash-o'
 import PencilIcon from 'react-icons/lib/ti/pencil'
-
+import ChatBubblesIcon from 'react-icons/lib/fa/comments'
 class PostView extends Component {
     state = {
         modalKey: '',
@@ -70,8 +70,8 @@ class PostView extends Component {
                                     <h1> {title} </h1>
                                 </div>
                                 <div className="meta">
-                                    <h4><PersonIcon size={30} color="grey" /> {author} </h4>
-                                    <h4><TopicFolderIcon size={25} color="grey" /> {category}</h4>
+                                    <h4><PersonIcon className="svg-no-hover" size={30} color="grey" /> {author} </h4>
+                                    <h4><TopicFolderIcon className="svg-no-hover" size={25} color="grey" /> {category}</h4>
                                 </div>
                             </div>
                         </div>
@@ -102,7 +102,9 @@ class PostView extends Component {
                     <section className="comments-view container">
                         <div className="row">
                             <div className="twelve columns">
-                                <h4>{`${commentCount} comment${commentCountPlural}`}</h4>
+                                <div className="comments-count">
+                                   <ChatBubblesIcon className="svg-no-fill" size={40} color="grey"/> {`${commentCount} comment${commentCountPlural}`}
+                                </div>
                             </div>
                         </div>
                         <CommentsView />

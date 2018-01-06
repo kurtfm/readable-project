@@ -124,7 +124,7 @@ svg:hover{
     background-color:rgb(115, 131, 165);
     border-color: rgb(115, 131, 165);
 }
-.post-page .meta svg:hover{
+.svg-no-hover:hover{
     fill: grey;
 }
 .go-back{
@@ -205,4 +205,13 @@ svg:hover{
 }
 .comment-utilities{
     margin-left:60%;
+}
+.comments-count{
+    color:rgb(90, 112, 161);
+}
+.form-modal button {
+    margin-left: 20px;
+}
+.form-modal textarea{
+    height: 200px;
 }
