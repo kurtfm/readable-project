@@ -27,7 +27,7 @@ The default browser should open to http://localhost:3000/ and show the main page
 
 The front end environment and the server may be started seperately in this order:
 ```bash
-npm run start-server
+npm run start-server &
 npm run start-frontend
 ```
 
