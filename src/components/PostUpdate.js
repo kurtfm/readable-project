@@ -1,13 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import { Form } from 'react-validify'
 import { Input, Select, TextArea, postRules, postErrors } from '../utils/FormValidationUtils'
 import { editPost } from '../actions'
 
 class PostUpdate extends Component {
 
+    static propTypes = {
+      summaryId:PropTypes.string,
+    }
+
     handleSubmit = (values) => {
-        this.props.editPost({id:this.props.id,
+        this.props.editPost({id:this.props.id||this.props.summaryId,
             title: values.title,
             author: values.author,
             body: values.body,
@@ -16,7 +21,11 @@ class PostUpdate extends Component {
     }
 
     render(){
-      const { author, body, title, category, } = this.props
+      const { posts, summaryId} = this.props
+      const author = this.props.author || posts[summaryId].author
+      const body = this.props.body || posts[summaryId].body
+      const title = this.props.title || posts[summaryId].title
+      const category = this.props.category || posts[summaryId].category
       return(
         <Form
             onSubmit={this.handleSubmit}
@@ -66,6 +75,7 @@ function mapStateToProps (state) {
         body: state.post.body,
         category: state.post.category,
         title: state.post.title,
+        posts: state.posts,
     }
   }
 

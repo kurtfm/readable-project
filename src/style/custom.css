@@ -68,24 +68,21 @@ svg:hover{
     -moz-border-radius: 3px 3px 3px 3px;
     -webkit-border-radius: 3px;
     border-radius: 3px 3px 3px 3px;
+}
+.post-summary .header{
     display:flex;
     justify-content: space-between;
 }
-.post-summary .scores{
-    padding:1em;
-    min-width:40px;
-}
-.post-title a{
+.post-summary .title a{
     color:rgb(10, 69, 117);
     text-decoration-line: underline;
 }
-.post-summary .post-meta{
-    float:left;
+.post-summary .info{
+    max-width: 70%;
 }
-.post-summary div.post-highlights{
-    float:right;
-    font-size:16px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+.post-summary .utilities{
+    display:flex;
+    justify-content: space-between;
 }
 .modal-overlay {
   z-index: 1000;

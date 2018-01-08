@@ -3,8 +3,10 @@ import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import PostRemove from './PostRemove'
+import PostVote from './PostVote'
+import PostEdit from './PostEdit'
 import ChatBubblesIcon from 'react-icons/lib/fa/comments'
-import ThumbsUpDownIcon from 'react-icons/lib/md/thumbs-up-down'
 import PersonIcon from 'react-icons/lib/md/person'
 
 class PostSummary extends Component {
@@ -25,16 +27,22 @@ class PostSummary extends Component {
         const { id } = this.props
         const { title, author, voteScore, commentCount } = this.props.posts[id]
         return (
-            <div className="post-summary">
-                <div>
-                    <h2 className="post-title">
-                        <Link to={this.getPostDetailsLink(id)}>{title}</Link>
-                    </h2>
-                    <h4 className="post-meta"><PersonIcon size={30} color="grey" /> {author}</h4>
+            <div className="post-summary constainer">
+                <div className="header">
+                    <div className="info">
+                        <h2 className="title">
+                            <Link to={this.getPostDetailsLink(id)}>{title}</Link>
+                        </h2>
+                        <h4><PersonIcon className="svg-no-hover" size={30} color="grey" /> {author}</h4>
+                    </div>
+                    <div className="highlights">
+                        <span><ChatBubblesIcon className="svg-no-hover" size={20} color="grey"/> {commentCount}</span>
+                        <PostVote size={20} summaryScore={voteScore} summaryId={id} />
+                    </div>
                 </div>
-                <div className="scores">
-                    <p><ChatBubblesIcon size={20} color="grey"/> {commentCount}</p>
-                    <p><ThumbsUpDownIcon size={20} color="grey"/> {voteScore}</p>
+                <div className="utilities">
+                    <PostEdit size={20} id={id} />
+                    <PostRemove size={20} id={id} />
                 </div>
             </div>
         )
