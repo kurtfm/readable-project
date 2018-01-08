@@ -103,7 +103,7 @@ class PostView extends Component {
                         <div className="row">
                             <div className="twelve columns">
                                 <div className="comments-count">
-                                   <ChatBubblesIcon className="svg-no-fill" size={40} color="grey"/> {`${commentCount} comment${commentCountPlural}`}
+                                   <ChatBubblesIcon className="svg-no-hover" size={40} color="grey"/> {`${commentCount} comment${commentCountPlural}`}
                                 </div>
                             </div>
                         </div>

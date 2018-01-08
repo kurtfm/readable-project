@@ -5,6 +5,9 @@ body {
 svg:hover{
     fill:rgb(90, 112, 161);
 }
+.svg-no-hover:hover{
+    fill: grey;
+}
 .svg-flip{
     -moz-transform: scaleX(-1);
     -o-transform: scaleX(-1);
@@ -123,9 +126,6 @@ svg:hover{
 .button-primary:hover,button.button-primary:hover{
     background-color:rgb(115, 131, 165);
     border-color: rgb(115, 131, 165);
-}
-.svg-no-hover:hover{
-    fill: grey;
 }
 .go-back{
     text-decoration: none;
