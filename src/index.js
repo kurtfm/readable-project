@@ -1,8 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import { BrowserRouter } from 'react-router-dom'
+import registerServiceWorker from './registerServiceWorker'
+import Modal from 'react-modal'
+import App from './components/App'
+import './style/normalize.css'
+import './style/skeleton.css'
+import './style/custom.css'
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+Modal.setAppElement('body')
+
+ReactDOM.render(
+    <BrowserRouter><App /></BrowserRouter>,
+    document.getElementById('root'))
+
+registerServiceWorker()
