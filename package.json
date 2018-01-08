@@ -18,8 +18,8 @@
     "redux-thunk": "^2.2.0"
   },
   "scripts": {
-    "react": "react-scripts start",
-    "server": "node api-server/server",
+    "start-frontend": "react-scripts start",
+    "start-server": "node api-server/server",
     "start": "concurrently --kill-others \"node api-server/server\" \"react-scripts start\"",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
