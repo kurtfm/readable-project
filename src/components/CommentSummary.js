@@ -10,21 +10,27 @@ import PersonIcon from 'react-icons/lib/md/person'
 import TrashIcon from 'react-icons/lib/fa/trash-o'
 import PencilIcon from 'react-icons/lib/ti/pencil'
 import RightChevronIcon from 'react-icons/lib/md/chevron-right'
+
 class CommentsSummary extends Component {
+
     static propTypes = {
         id:PropTypes.string.isRequired,
     }
+
     state = {
         modalKey: '',
       }
-      openModal = () => {
-        const newModalKey = getNewModalKey()
-        this.setState({modalKey: newModalKey})
-        this.props.updateModalKey(newModalKey)
-      }
-      closeModal = () => {
-        this.props.updateModalKey(null)
-      }
+
+    openModal = () => {
+    const newModalKey = getNewModalKey()
+    this.setState({modalKey: newModalKey})
+    this.props.updateModalKey(newModalKey)
+    }
+
+    closeModal = () => {
+    this.props.updateModalKey(null)
+    }
+
     render(){
         const { id } = this.props
         const { body, author } = this.props.comments[id]
@@ -63,12 +69,14 @@ class CommentsSummary extends Component {
         )
     }
 }
+
 function mapStateToProps (state) {
     return {
         comments: state.comments,
         modalKey: state.modal.key,
     }
   }
+  
   function mapDispatchToProps (dispatch) {
     return {
         removeComment: (id) => dispatch(removeComment(id)),

@@ -18,6 +18,7 @@ class PostAdd extends Component {
         })
         this.props.finishUpdate()
     }
+
     render(){
         return(
             <Form

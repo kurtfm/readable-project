@@ -22,6 +22,7 @@ class CommentAdd extends Component {
         })
         this.props.finishUpdate()
     }
+    
     render(){
         return(
             <Form

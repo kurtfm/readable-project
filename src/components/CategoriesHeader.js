@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import { getCategories, filterPosts, clearFilter } from '../actions'
 
 class CategoriesHeader extends Component {
+
     static propTypes = {
         categoryParam:PropTypes.string.isRequired,
     }
@@ -20,11 +21,13 @@ class CategoriesHeader extends Component {
         this.props.filterPosts(category)
         this.updateCategoryPath(category)
     }
+
     handleFilterClear(){
         this.setState({category:''})
         this.props.clearFilter()
         this.updateCategoryPath('')
     }
+
     updateCategoryPath(category){
         if(category === ''){
             this.props.history.push(`/`)
@@ -33,6 +36,7 @@ class CategoriesHeader extends Component {
             this.props.history.push(`/category/${category}`)
         }
     }
+
     componentDidMount() {
         this.props.getCategories()
         if(this.state.category !== ''){

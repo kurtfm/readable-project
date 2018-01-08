@@ -23,9 +23,10 @@ class SortHeader extends Component {
     }
 
     render(){
+        const sortByVal = this.state.sortBy || ""
         return (
             <div>
-                <select value={this.state.sortBy} onChange={(event) => this.handleSortChange(event)}>
+                <select value={sortByVal} onChange={(event) => this.handleSortChange(event)}>
                     <option value="">Sort By:</option>
                     {['time','author','title','votes'].map((method,index) => (
                         <option key={index} value={method}>{method}</option>
