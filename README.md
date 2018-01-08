@@ -25,9 +25,9 @@ npm start
 
 The default browser should open to http://localhost:3000/ and show the main page of the project.
 
-The front end environment and the server may be started seperately in this order:
+The front end environment and the server may be started seperately (in separate terminal sessions (windows/tabs)) in this order:
 ```bash
-npm run start-server &
+npm run start-server
 npm run start-frontend
 ```
 
