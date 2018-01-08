@@ -8,20 +8,24 @@ import CommentAdd from './CommentAdd'
 import CommentBubbleIcon from 'react-icons/lib/md/chat-bubble-outline'
 
 class PostCommentAdd extends Component {
+
     static propTypes = {
         id:PropTypes.string.isRequired,
     }
+
     state = {
         modalKey: '',
       }
-      openModal = () => {
-        const newModalKey = getNewModalKey()
-        this.setState({modalKey: newModalKey})
-        this.props.updateModalKey(newModalKey)
-      }
-      closeModal = () => {
-        this.props.updateModalKey(null)
-      }
+
+    openModal = () => {
+    const newModalKey = getNewModalKey()
+    this.setState({modalKey: newModalKey})
+    this.props.updateModalKey(newModalKey)
+    }
+
+    closeModal = () => {
+    this.props.updateModalKey(null)
+    }
 
     render(){
         return (
@@ -49,6 +53,7 @@ function mapStateToProps (state) {
         modalKey: state.modal.key,
     }
   }
+
   function mapDispatchToProps (dispatch) {
     return {
         updateModalKey: (key) => dispatch(updateModalKey(key)),

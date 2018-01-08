@@ -21,6 +21,7 @@ class CommentsView extends Component {
         )
     }
 }
+
 function mapStateToProps (state) {
     const entries = state.comments
     const entriesArr = Object.keys(entries)[0] ? Object.keys(entries).map(id => {

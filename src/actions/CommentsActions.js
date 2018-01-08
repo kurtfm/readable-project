@@ -29,6 +29,7 @@ function updateComments(comments){
         comments,
     }
 }
+
 export function editComment(edits){
     return function(dispatch, getState){
         putCommentEdit(edits).then((data) => {
@@ -37,6 +38,7 @@ export function editComment(edits){
           .catch()
     }
 }
+
 export function addComment(comment){
     return function(dispatch, getState){
         const currentState = getState()
@@ -50,12 +52,14 @@ export function addComment(comment){
           .catch()
     }
 }
+
 function updateCommentInComments(comment){
     return {
         type: UPDATE_COMMENT_IN_COMMENTS,
         comment
     }
 }
+
 export function removeComment(id){
     return function(dispatch, getState){
         const currentState = getState()
@@ -76,12 +80,12 @@ function removeCommentInComments(comment){
         id: comment.id
     }
 }
+
 export function clearComments(){
     return {
         type: CLEAR_COMMENTS
     }
 }
-
 
 export function commentUpVote(id){
     return function(dispatch, getState){
@@ -90,6 +94,7 @@ export function commentUpVote(id){
         })
     }
 }
+
 export function commentDownVote(id){
     return function(dispatch, getState){
         decrementCommentVote(id).then((data) => {
@@ -98,7 +103,7 @@ export function commentDownVote(id){
     }
 }
 
-export function decrementCommentCountInPosts(id,posts){
+function decrementCommentCountInPosts(id,posts){
     return {
         type: DECREMENT_COMMENT_COUNT_IN_POSTS,
         id,
@@ -106,21 +111,23 @@ export function decrementCommentCountInPosts(id,posts){
     }
 }
 
-export function incrementCommentCountInPosts(id,posts){
+function incrementCommentCountInPosts(id,posts){
     return {
         type: INCREMENT_COMMENT_COUNT_IN_POSTS,
         id,
         posts,
     }
 }
-export function decrementCommentCountInPost(id,post){
+
+function decrementCommentCountInPost(id,post){
     return {
         type: DECREMENT_COMMENT_COUNT_IN_POST,
         id,
         post,
     }
 }
-export function incrementCommentCountInPost(id,post){
+
+function incrementCommentCountInPost(id,post){
     return {
         type: INCREMENT_COMMENT_COUNT_IN_POST,
         id,

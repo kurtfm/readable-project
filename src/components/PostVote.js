@@ -5,7 +5,6 @@ import ThumbsUp from 'react-icons/lib/fa/thumbs-o-up'
 import ThumbsDown from 'react-icons/lib/fa/thumbs-o-down'
 
 class PostVote extends Component {
-
     render(){
         return(
             <div className="post-vote vote">
@@ -29,6 +28,7 @@ function mapStateToProps (state) {
         id: state.post.id,
     }
   }
+
   function mapDispatchToProps (dispatch) {
     return {
       upVote: (id) => dispatch(postUpVote(id)),

@@ -20,17 +20,21 @@ class PostsView extends Component {
         this.props.clearPost()
         this.props.clearComments()
     }
+
     state = {
         modalKey: '',
       }
-      openModal = () => {
-        const newModalKey = getNewModalKey()
-        this.setState({modalKey: newModalKey})
-        this.props.updateModalKey(newModalKey)
-      }
-      closeModal = () => {
-        this.props.updateModalKey(null)
-      }
+
+    openModal = () => {
+    const newModalKey = getNewModalKey()
+    this.setState({modalKey: newModalKey})
+    this.props.updateModalKey(newModalKey)
+    }
+
+    closeModal = () => {
+    this.props.updateModalKey(null)
+    }
+
     render(){
         const categoryParam = (this.props.hasOwnProperty('match') &&
             this.props.match.hasOwnProperty('params') &&
@@ -86,13 +90,11 @@ function mapStateToProps (state) {
             return null
         }
     }) : []
-
     const preppedPosts = (posts) => {
         let retArr = posts
         const {filter} = state
         const { category, sortBy, orderBy } = state.filter
         const orderByAscending = !filter.hasOwnProperty('orderBy') || (orderBy === 'ascending' || orderBy === null)
-
         if(filter.hasOwnProperty('category') && category !== null){
             retArr = posts.filter((post) => (post.category === category))
         }
@@ -115,23 +117,22 @@ function mapStateToProps (state) {
 
         return retArr
     }
-
     return {
         posts: preppedPosts(entriesArr),
         modalKey: state.modal.key,
     }
-  }
+}
 
-  function mapDispatchToProps (dispatch) {
-    return {
-      getPosts: () => dispatch(getPosts()),
-      clearPost: () => dispatch(clearPost()),
-      clearComments: () => dispatch(clearComments()),
-      updateModalKey: (key) => dispatch(updateModalKey(key)),
-    }
-  }
+function mapDispatchToProps (dispatch) {
+return {
+    getPosts: () => dispatch(getPosts()),
+    clearPost: () => dispatch(clearPost()),
+    clearComments: () => dispatch(clearComments()),
+    updateModalKey: (key) => dispatch(updateModalKey(key)),
+}
+}
 
-  export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(PostsView)
+export default connect(
+mapStateToProps,
+mapDispatchToProps
+)(PostsView)

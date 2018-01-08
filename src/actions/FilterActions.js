@@ -22,12 +22,14 @@ export function sortPosts(method){
         method,
     }
 }
+
 export function orderPosts(order){
     return {
         type: SORT_POSTS,
         order,
     }
 }
+
 export function clearSort(){
     return {
         type: CLEAR_SORT,

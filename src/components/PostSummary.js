@@ -21,7 +21,6 @@ class PostSummary extends Component {
         }
     }
 
-
     render(){
         const { id } = this.props
         const { title, author, voteScore, commentCount } = this.props.posts[id]
@@ -41,11 +40,13 @@ class PostSummary extends Component {
         )
     }
 }
+
 function mapStateToProps (state) {
     return {
         posts: state.posts,
     }
   }
+
   function mapDispatchToProps (dispatch) {
     return {
     }

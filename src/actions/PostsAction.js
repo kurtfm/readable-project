@@ -11,7 +11,7 @@ export function getPosts(){
     }
 }
 
-export function updatePosts(posts){
+function updatePosts(posts){
     return {
         type: GET_POSTS,
         posts

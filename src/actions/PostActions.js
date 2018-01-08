@@ -5,7 +5,6 @@ import { getSinglePost,
     incrementPostVote,
     decrementPostVote} from '../utils/ReadableAPI'
 
-
 export const GET_POST = 'GET_POST'
 export const CLEAR_POST = 'CLEAR_POST'
 export const DOWNVOTE_POST = 'DOWNVOTE_POST'
@@ -26,18 +25,21 @@ function updatePost(post){
         post
     }
 }
+
 function updatePostInPosts(post){
     return {
         type: UPDATE_POST_IN_POSTS,
         post
     }
 }
+
 function removePostInPosts(post){
     return {
         type: REMOVE_POST_IN_POSTS,
         id: post.id
     }
 }
+
 export function clearPost(){
     return {
         type: CLEAR_POST
@@ -62,6 +64,7 @@ export function addPost(post){
           .catch()
     }
 }
+
 export function removePost(id){
     return function(dispatch, getState){
         deletePost(id).then((data)=> {
@@ -79,6 +82,7 @@ export function postUpVote(id){
         })
     }
 }
+
 export function postDownVote(id){
     return function(dispatch, getState){
         decrementPostVote(id).then((data) => {

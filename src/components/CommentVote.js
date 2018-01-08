@@ -32,6 +32,7 @@ function mapStateToProps (state) {
         comments: state.comments,
     }
   }
+
   function mapDispatchToProps (dispatch) {
     return {
       upVote: (id) => dispatch(commentUpVote(id)),

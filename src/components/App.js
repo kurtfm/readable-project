@@ -19,7 +19,6 @@ const store = createStore(
 )
 
 class App extends Component {
-
   render() {
     return (
       <Provider store={store}>
@@ -43,7 +42,6 @@ class App extends Component {
       </Provider>
     )
   }
-
 }
 
 export default App

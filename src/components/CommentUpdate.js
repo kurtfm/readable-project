@@ -5,8 +5,8 @@ import { Form } from 'react-validify'
 import { Input, TextArea, commentErrors, commentRules } from '../utils/FormValidationUtils'
 import { editComment } from '../actions'
 
-
 class PostUpdate extends Component {
+
     static propTypes = {
         id:PropTypes.string.isRequired,
         author:PropTypes.string.isRequired,
@@ -20,6 +20,7 @@ class PostUpdate extends Component {
         })
         this.props.finishUpdate()
     }
+
     render(){
         const { author, body } = this.props
         return(
@@ -47,6 +48,7 @@ class PostUpdate extends Component {
         )
     }
 }
+
 function mapStateToProps (state) {
     return {}
   }

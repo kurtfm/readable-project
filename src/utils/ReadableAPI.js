@@ -22,6 +22,7 @@ const axios = Axios.create({
     return Promise.reject(error);
   })
 */
+
 export const getAllPosts = () =>
   axios.get('/posts')
   .then(response => response.data)
@@ -49,12 +50,14 @@ export const postPost = ({ id, title, body, author, category, timestamp }) =>
   .catch((error) => {
     console.log(error);
   })
-  export const deletePost = (id) =>
+
+export const deletePost = (id) =>
   axios.delete(`/posts/${id}`)
   .then(response => response.data)
   .catch((error) => {
     console.log(error);
   })
+
 export const getAllCategories = () =>
   axios.get('/categories')
   .then(response => response.data)
@@ -68,30 +71,35 @@ export const getAllComments = (id) =>
   .catch((error) => {
     console.log(error);
   })
+
 export const putCommentEdit = ({ id, body, author }) =>
   axios.put(`/comments/${id}`,{ author, body })
   .then(response => response.data)
   .catch((error) => {
     console.log(error);
   })
+
 export const postComment = ({ id, author, body, parentId, timestamp }) =>
   axios.post(`/comments/`,{ id, author, body, parentId, timestamp })
   .then(response => response.data)
   .catch((error) => {
     console.log(error);
   })
+
 export const deleteComment = (id) =>
   axios.delete(`/comments/${id}`)
   .then(response => response.data)
   .catch((error) => {
     console.log(error);
   })
+
 export const incrementPostVote = (id) =>
   axios.post(`posts/${id}`,{option:'upVote'})
   .then(response => response.data)
   .catch((error) => {
     console.log(error);
   })
+
 export const decrementPostVote = (id) =>
   axios.post(`posts/${id}`,{option:'downVote'})
   .then(response => response.data)

@@ -4,7 +4,6 @@ import { Form } from 'react-validify'
 import { Input, Select, TextArea, postRules, postErrors } from '../utils/FormValidationUtils'
 import { editPost } from '../actions'
 
-
 class PostUpdate extends Component {
 
     handleSubmit = (values) => {
@@ -15,6 +14,7 @@ class PostUpdate extends Component {
             category: values.category})
         this.props.finishUpdate()
     }
+
     render(){
       const { author, body, title, category, } = this.props
       return(
@@ -58,6 +58,7 @@ class PostUpdate extends Component {
     )
     }
 }
+
 function mapStateToProps (state) {
     return {
         id: state.post.id,
