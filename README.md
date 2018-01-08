@@ -12,15 +12,24 @@ git clone https://github.com/kurtfm/readable-project.git
 
 Change directory into the project and install requirements.
 ```bash
+cd readable-project
 npm install
 ```
 
-Start development server and API server
+Start development server and API server* at once
 ```bash
-npm start both
+npm start
 ```
 
+*Note: I have included the API Server with this repo please use this for review.
+
 The default browser should open to http://localhost:3000/ and show the main page of the project.
+
+The front end environment and the server may be started seperately (in separate terminal sessions (windows/tabs)) in this order:
+```bash
+npm run start-server
+npm run start-frontend
+```
 
 ## Requirements / Features
 The overall requirement for the project:
