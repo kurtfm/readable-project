@@ -49,7 +49,7 @@ class PostsView extends Component {
                                 Add New Post
                             </button>
                             <div className="list-utilities">
-                                <ListIcon size={40} color="grey" />
+                                <ListIcon className="svg-no-hover" size={40} color="grey" />
                                 <CategoriesHeader categoryParam={categoryParam} />
                                 <SortHeader />
                             </div>
