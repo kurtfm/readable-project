@@ -6,7 +6,10 @@ import CategoriesHeader from './CategoriesHeader'
 import SortHeader from './SortHeader'
 import PostAdd from './PostAdd'
 import Modal from 'react-modal'
-import { getNewModalKey } from '../utils/Helpers'
+import { getNewModalKey,
+        sortByCharacters,
+        sortByComparison,
+        sortByTime } from '../utils/Helpers'
 import ListIcon from 'react-icons/lib/fa/list'
 import BookIcon from 'react-icons/lib/go/book'
 
@@ -89,40 +92,6 @@ function mapStateToProps (state) {
         const {filter} = state
         const { category, sortBy, orderBy } = state.filter
         const orderByAscending = !filter.hasOwnProperty('orderBy') || (orderBy === 'ascending' || orderBy === null)
-
-        const sortByCharacters = (arr,key,asc) => (
-            arr.sort((a,b) => {
-                const str1 = a[key].toLowerCase().replace(/\s/g,'')
-                const str2 = b[key].toLowerCase().replace(/\s/g,'')
-                if(str1 < str2){
-                    return asc ? -1 : 1
-                }
-                if(str1 > str2){
-                    return asc ? 1 : -1
-                }
-                return 0
-            })
-        )
-        const sortByComparison = (arr,key,asc) => (
-            arr.sort((a,b) => {
-                const str1 = a[key]
-                const str2 = b[key]
-                if(str1 > str2){
-                    return asc ? -1 : 1
-                }
-                if(str1 < str2){
-                    return asc ? 1 : -1
-                }
-                return 0
-            })
-        )
-
-        const sortByTime = (arr,asc) => (
-            arr.sort((a,b) => {
-                return asc ? a.timestamp - b.timestamp :
-                    b.timestamp - a.timestamp
-            })
-        )
 
         if(filter.hasOwnProperty('category') && category !== null){
             retArr = posts.filter((post) => (post.category === category))
