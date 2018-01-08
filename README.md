@@ -1,6 +1,6 @@
 # Readable Project
 
-This project was created and submitted as the first project in the Udacity React Nanodegree.  The project utilizes the provided server/APIs to complete the requirements.
+This project was created and submitted as the second project in the Udacity React Nanodegree.  The project utilizes the provided server/APIs to complete the requirements.
 
 
 ## Run Project Locally
@@ -26,8 +26,10 @@ The default browser should open to http://localhost:3000/ and show the main page
 The overall requirement for the project:
 > For the Readable project, you will build a content and comment web app. Users will be able to post content to predefined categories, comment on their posts and other users' posts, and vote on posts and comments. Users will also be able to edit and delete posts and comments.
 
+### Redux Store / APIs
 - Uses provided APIs to get initial data and Redux to manage state.
 - As changes are made the APIs are called and the state is updated.
+- Additionally the store was used to track filter and sort state across components as well as a modal key (so only one modal would be open at a time)
 
 ### Main view
 endpoint: http://localhost:3000/
