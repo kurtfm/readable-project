@@ -14,24 +14,15 @@ class PostSummary extends Component {
         id:PropTypes.string.isRequired,
     }
 
-    getPostDetailsLink = (id)=>{
-        if(this.props.location.pathname === ('/' || '') ){
-            return `/post/${id}`
-        }
-        else{
-            return `${this.props.location.pathname}/${id}`
-        }
-    }
-
     render(){
         const { id } = this.props
-        const { title, author, voteScore, commentCount } = this.props.posts[id]
+        const { title, author, voteScore, commentCount, category } = this.props.posts[id]
         return (
             <div className="post-summary constainer">
                 <div className="header">
                     <div className="info">
                         <h2 className="title">
-                            <Link to={this.getPostDetailsLink(id)}>{title}</Link>
+                            <Link to={`/${category}/${id}`}>{title}</Link>
                         </h2>
                         <h4><PersonIcon className="svg-no-hover" size={30} color="grey" /> {author}</h4>
                     </div>

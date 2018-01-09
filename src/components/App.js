@@ -25,8 +25,8 @@ class App extends Component {
         <div className="App">
           <Switch>
             <Route exact path='/' component={PostsView}/>
-            <Route exact path='/category/:category' component={PostsView}/>
-            <Route exact path='/category/:category/:id' component={PostView}/>
+            <Route exact path='/:category' component={PostsView}/>
+            <Route exact path='/:category/:id' component={PostView}/>
             <Route path='/post/:id' component={PostView}/>
             <Route path='*' exact={true} render={() => (
               <div>
