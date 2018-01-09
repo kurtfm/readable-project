@@ -28,7 +28,7 @@ class PostSummary extends Component {
                     </div>
                     <div className="highlights">
                         <span><ChatBubblesIcon className="svg-no-hover" size={20} color="grey"/> {commentCount}</span>
-                        <PostVote size={20} summaryScore={voteScore} summaryId={id} />
+                        <PostVote size={20} score={voteScore} id={id} />
                     </div>
                 </div>
                 <div className="utilities">

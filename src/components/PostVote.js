@@ -9,13 +9,14 @@ class PostVote extends Component {
 
     static propTypes = {
         size:PropTypes.number.isRequired,
-        summaryScore:PropTypes.number,
-        summaryId:PropTypes.string,
+        score:PropTypes.number,
+        id:PropTypes.string,
     }
 
     render(){
-        const id = this.props.id || this.props.summaryId
-        const score = this.props.score || this.props.summaryScore
+        const id = this.props.id
+        console.log(id)
+        const score = this.props.score
         return(
             <div className="post-vote vote">
                 <button  className="de-button" onClick={() => this.props.upVote(id)} >
@@ -33,10 +34,7 @@ class PostVote extends Component {
 }
 
 function mapStateToProps (state) {
-    return {
-        score: state.post.voteScore,
-        id: state.post.id,
-    }
+    return {}
   }
 
   function mapDispatchToProps (dispatch) {
