@@ -33,7 +33,7 @@ class CategoriesHeader extends Component {
             this.props.history.push(`/`)
         }
         else{
-            this.props.history.push(`/category/${category}`)
+            this.props.history.push(`/${category}`)
         }
     }
 
