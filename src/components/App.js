@@ -27,7 +27,6 @@ class App extends Component {
             <Route exact path='/' component={PostsView}/>
             <Route exact path='/:category' component={PostsView}/>
             <Route exact path='/:category/:id' component={PostView}/>
-            <Route path='/post/:id' component={PostView}/>
             <Route path='*' exact={true} render={() => (
               <div>
                 <div className="missing-view">

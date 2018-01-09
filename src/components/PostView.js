@@ -31,7 +31,8 @@ class PostView extends Component {
             author,
             category,
             deleted,
-            commentCount
+            commentCount,
+            voteScore
         } = this.props.post
 
         const commentCountPlural = commentCount === 1 ? '' : 's'
@@ -73,7 +74,7 @@ class PostView extends Component {
                                 <PostCommentAdd id={id} />
                             </div>
                             <div className="six columns">
-                                <PostVote size={30} />
+                                <PostVote size={30}  vcore={voteScore} id={id}/>
                             </div>
                         </div>
                     </section>
