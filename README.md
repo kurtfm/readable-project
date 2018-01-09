@@ -50,17 +50,15 @@ endpoint: http://localhost:3000/
 - Can up/down vote, edit, delete a post listed
 - Can add a new post
 
-### Post detail view
-endpoint: http://localhost:3000/:id
-
 
 ### Category view
-http://localhost:3000/category/:category
+http://localhost:3000/:category
 
 - Lists all posts in a given category
 - Post detail links use the Category post detail view below
 
-### Category post detail view
-http://localhost:3000/category/:category/:id
+### Post detail view
+http://localhost:3000/:category/:id
 
 - Show the Post detail view for a post in a specific category
+- It will call the API to get post details using the id if there is no store to pull from
