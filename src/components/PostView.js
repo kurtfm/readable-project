@@ -74,7 +74,7 @@ class PostView extends Component {
                                 <PostCommentAdd id={id} />
                             </div>
                             <div className="six columns">
-                                <PostVote size={30}  vcore={voteScore} id={id}/>
+                                <PostVote size={30}  score={voteScore} id={id}/>
                             </div>
                         </div>
                     </section>
